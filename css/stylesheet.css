@@ -1,0 +1,191 @@
+html{
+    font-family: 'Open Sans', sans-serif;
+    background-color: rgb(248, 248, 248);
+}
+
+/* =======================Main Card Styling ======================= */
+#main-card{
+    height: 90vh;
+    margin: 5vh 0;
+    width: 90%;
+    padding: 0;
+    border-radius: 15px 15px 0 0;
+    display: inline-block;
+    overflow: hidden;
+}
+#width-left{
+    text-align: center;
+}
+
+    /* Top level Menu Styling */
+    #top-level-menu{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        font-size: 0;
+    }
+    #top-level-left{
+        border-radius: 15px 0 0 0;
+    }
+    #top-level-right{
+        border-radius: 0 15px 0 0;
+    }
+    #top-level-menu button{
+        width: 33.333333333333333333333%;
+        margin: 0;
+        padding: 0;
+        border: none;
+        /* font-size: 1vw!important; */
+        font-size: 11px;
+        font-weight: 600; 
+        color: #818181;
+        background-color: #ebebeb!important;
+    }
+    #top-level-menu button.uk-active{
+        background-color: #cf3d3d!important;
+        color: white!important;
+        border: none;
+    } 
+    #top-level-menu button:hover{
+        background-color:  #cf3d3d!important;
+        color: white;
+        border: none;
+    }
+
+    /* Second level menus */
+    .second-level-menu{
+        margin-top: -15px;  
+    }
+    .second-level-menu li a{
+        font-size: 10px;
+        padding: 10px;
+        height: 3vh!important;
+    } 
+    .second-level-menu li.uk-active a{
+        border-color: #cf3d3d!important;
+    }
+
+    /* Choose Apparel Styling */
+    .clothing-items{
+        overflow: scroll;
+        height: 80vh;
+        padding: 0 28px;
+    }
+    .clothing-items .uk-text-center{
+       margin-top: 20px;
+    }
+    .clothing-items .uk-card{
+        padding: 0px;
+        height: 45vh;
+        min-height: 150px;
+        margin: 0 -3px;
+        border-radius: 10px;
+    }
+    .clothing-items img{
+        height: 65%;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        object-fit: cover;
+    }
+    .clothing-items .name{
+        margin: 1.5vh;
+        margin-top: 6px;
+        padding: 0;
+        font-size: 1.2vw;
+        font-weight: 700;
+        
+    }
+    .clothing-items .colors{
+        margin: 0.5vh;
+        padding: 0;
+        font-size: 1vw;
+    }
+    .clothing-items .price{
+        margin: 0.5vh;
+        padding: 0;
+        font-size: 1.1vw;
+    }
+    .clothing-menu-bottom-space{
+        height: 8vh;
+    }
+    .clothing-items .uk-card:active{
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    /* Add Customization Styling */
+    .dot {
+        height: 25px;
+        width: 25px;
+        background-color: #bbb;
+        border-radius: 50%;
+        display: inline-block;
+      }
+    #customization-items{
+        overflow: scroll;
+        height: 80vh;
+    }
+    #customization-items img{
+        border: 1px solid #81818170; 
+        width: 100px;
+        height: 150px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+    #customization-items img:hover{
+        border-color: #cf3d3d;
+    }
+    #custom-logo-print{
+        padding: 0 20px;
+    }
+    form{
+        padding: 30px;
+        overflow: scroll;
+        height: 80vh;
+    }
+    /* Order Details Styling */
+   
+/* ======================= Clothing Card Styling ======================= */
+#width-right{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+#clothing-card{
+    height: 60vh;
+    margin-top: 18vh;
+    width: 60%;
+    display: inline-block;
+    padding: 0;
+}
+#clothing-card img{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+#color-options{
+    margin-top: 4vh;
+}
+
+/* ======================= Scroll Bar style ======================= */
+    /* width */
+    ::-webkit-scrollbar {
+        width: 5px;
+    }
+    
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #ebebeb; 
+    }
+    
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #818181; 
+    }
+    
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555; 
+    }
+
+  
