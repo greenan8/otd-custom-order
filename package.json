@@ -1,0 +1,13 @@
+{
+  "name": "otd-custom-order",
+  "version": "0.1.0",
+  "description": "A Webapp that allows OTD customers to design and submit custom orders",
+  "main": "index.js",
+  "repository": "https://github.com/greenan8/otd-custom-order",
+  "author": "Andrew Greenan <andrewbgreenan@gmail.com>",
+  "license": "",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^1.19.1"
+  }
+}
