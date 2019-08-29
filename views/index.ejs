@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <title></title>
+    <!-- <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <!-- UIkit CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css\uikit.min.css" />
+    <link rel="stylesheet" href="css\stylesheet.css" />
+</head>
+
+<body>
+
+    <div uk-grid>
+
+        <!-- Left side main menu -->
+        <div id="width-left" class="uk-width-2-3@m">
+            <div id="main-card" class="uk-card uk-card-default uk-card-body">
+
+                <!-- Top level menu -->
+                <div id="top-level-menu" uk-switcher="animation: uk-animation-fade; toggle: > *">
+                    <button id="top-level-left" class="uk-button uk-button-default uk-text-nowrap" type="button">1.
+                        Choose
+                        Apparel</button>
+                    <button class="uk-button uk-button-default uk-text-nowrap" type="button">2. Add
+                        Customization</button>
+                    <button id="top-level-right" class="uk-button uk-button-default uk-text-nowrap" type="button">3.
+                        Order
+                        Details</button>
+                </div>
+
+                <ul class="uk-switcher uk-margin">
+                    <li>
+                        <ul class="uk-child-width-expand second-level-menu" uk-tab>
+                            <li id="clothing-menu-left"><a href="#">Tees and Tanks</a></li>
+                            <li><a href="#">Sweaters and Sleeves</a></li>
+                            <li><a href="#">Pants and Shorts</a></li>
+                            <li id="clothing-menu-right"><a href="#">Accessories and Hats &nbsp;&nbsp;&nbsp;</a></li>
+                        </ul>
+                        <ul class="uk-switcher">
+                            <li id="tees-menu" class="clothing-items">
+                                <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+                                    
+                                    <% shirtNames.forEach(function(shirt){ %> 
+                                    <div class="clothing-option" id= <%= shirt.replace(' ','') %>>
+                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                            <img src="imgs\tee.jpg">
+                                            <h6 class="name"> <%= shirt %> </h6>
+                                            <p class="colors"> 17+ Colors... </p>
+                                            <p class="price">Starts at $7.99</p>
+                                        </div>
+                                    </div>
+                                   <%})%>
+
+                                </div>
+                                <div class="clothing-menu-bottom-space"></div>
+                            </li>
+
+                            <li id="sweaters-menu" class="clothing-items">
+                                <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+                                    <div>
+                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                            <img src="imgs\tee.jpg">
+                                            <h6 class="name"> Gilden Sweater </h6>
+                                            <p class="colors"> 15+ Colors... </p>
+                                            <p class="price">Starts at $19.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clothing-menu-bottom-space"></div>
+
+
+                            </li>
+
+                            <li id="pants-menu" class="clothing-items">
+                                <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+                                    <div>
+                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                            <img src="imgs\tee.jpg">
+                                            <h6 class="name"> Gilden Pants </h6>
+                                            <p class="colors"> 17+ Colors... </p>
+                                            <p class="price">Starts at $7.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clothing-menu-bottom-space"></div>
+                            </li>
+
+                            <li id="accessories-menu" class="clothing-items">
+                                <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+                                    <div>
+                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                            <img src="imgs\tee.jpg">
+                                            <h6 class="name"> Gilden Hat </h6>
+                                            <p class="colors"> 17+ Colors... </p>
+                                            <p class="price">Starts at $7.99</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clothing-menu-bottom-space"></div>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li id="customization-items">
+                        <div id="custom-color">
+                            <h4>Select Clothing Color</h4>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <hr>
+                        </div>
+                        <div id="custom-upload-logo">
+                            <h4>Add Logo</h4>
+                            <p>Upload a high quality PNG image of your custom logo</p>
+                            <div class="js-upload" uk-form-custom>
+                                <input type="file" multiple>
+                                <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
+                            </div>
+                            <hr>
+                        </div>
+                        <div id="custom-logo-print">
+
+                        </div>
+                        <div id="custom-logo-position">
+                            <h4>Logo Position</h4>
+                            <p>Select from the avaliable locations where you would like your logo printed.</p>
+                            <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
+                            <img src="imgs/p1.png">
+                            <img src="imgs/p2.png">
+                            <img src="imgs/p3.png">
+                            <span uk-icon="icon: chevron-right; ratio: 1.5"></span>
+                            <hr>
+                        </div>
+                        <div id="custom-logo-print">
+                            <h4>Screen Print or Stitching</h4>
+                            <div class="uk-column-1-2 uk-column-divider">
+                                <p>Screen Print is recommended for logos with many colors. Cost is calculated through %
+                                    of your image that is not transparent.</p>
+                                <p>Stitching is recommended for logos with less colors. Cost is calculated through the
+                                    number of colors detected in your logo.</p>
+
+                            </div>
+                            <div class="uk-column-1-2 uk-column-divider">
+                                <h1 class="uk-text-danger uk-text-large">0%</h1>
+                                <h1 class="uk-text-danger uk-text-large">3 Colors</h1>
+                            </div>
+
+
+                            <hr>
+                        </div>
+                        <div id="custom-list-upload">
+                            <h4>Custom Text</h4>
+                            <p>Upload a csv or excel file. <a href="">Click here</a> to download template.</p>
+                            <div class="js-upload" uk-form-custom>
+                                <input type="file" multiple>
+                                <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
+                            </div>
+                            <hr>
+                        </div>
+                        <div id="custom-list-options">
+                            <h4>Logo Position</h4>
+                            <p>Select from the avaliable locations where you would like your logo printed.</p>
+                            <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
+                            <img src="imgs/p1.png">
+                            <img src="imgs/p2.png">
+                            <img src="imgs/p3.png">
+                            <span uk-icon="icon: chevron-right; ratio: 1.5"></span>
+                            <hr>
+                        </div>
+
+
+
+
+                    <li>
+
+                        <!-- <ul class="uk-child-width-expand second-level-menu" uk-tab>
+                            <li id="clothing-menu-left"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li id="clothing-menu-right"><a href="#">4</a></li>
+                        </ul>
+                        <ul class="uk-switcher">
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                        </ul> -->
+                        <form>
+                            <fieldset class="uk-fieldset">
+
+                                <legend class="uk-legend">Form Example</legend>
+
+                                <div class="uk-margin">
+                                    <input class="uk-input" type="text" placeholder="Input">
+                                </div>
+
+                                <div class="uk-margin">
+                                    <select class="uk-select">
+                                        <option>Option 01</option>
+                                        <option>Option 02</option>
+                                    </select>
+                                </div>
+
+                                <div class="uk-margin">
+                                    <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
+                                </div>
+
+                                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                    <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
+                                    <label><input class="uk-radio" type="radio" name="radio2"> B</label>
+                                </div>
+
+                                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
+                                    <label><input class="uk-checkbox" type="checkbox" checked> A</label>
+                                    <label><input class="uk-checkbox" type="checkbox"> B</label>
+                                </div>
+
+                                <div class="uk-margin">
+                                    <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1">
+                                </div>
+
+                            </fieldset>
+                        </form>
+                    </li>
+                </ul>
+
+
+
+
+
+            </div>
+        </div>
+
+
+
+
+        <div id="width-right" class="uk-width-1-3@m">
+
+            <div id="clothing-card" class="uk-card uk-card-default uk-card-body">
+                <img src="imgs\tee.jpg">
+            </div>
+            <div id="color-options">
+                <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
+                <span uk-icon="icon: chevron-right; ratio: 1.5"></span>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <!-- UIkit JS -->
+    <script src="js\uikit.min.js"></script>
+    <script src="js\uikit-icons.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="js\eventHandlers.js"></script>
+</body>
+
+</html>
