@@ -44,13 +44,13 @@
                             <li id="tees-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
                                     
-                                    <% shirtNames.forEach(function(shirt){ %> 
-                                    <div class="clothing-option" id= <%= shirt.replace(' ','') %>>
+                                    <% allRecords.forEach(function(record){ %> 
+                                    <div class="clothing-option" id= <%record.id %>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= shirt %> </h6>
+                                            <h6 class="name"> <%= record.get('Name') %> </h6>
                                             <p class="colors"> 17+ Colors... </p>
-                                            <p class="price">Starts at $7.99</p>
+                                            <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
                                         </div>
                                     </div>
                                    <%})%>
