@@ -44,15 +44,18 @@
                             <li id="tees-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
                                     
+                                    <!-- TODO: Make one big loop with cases/ifs -->
                                     <% allRecords.forEach(function(record){ %> 
-                                    <div class="clothing-option" id= <%record.id %>>
-                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"> 17+ Colors... </p>
-                                            <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
-                                        </div>
-                                    </div>
+                                        <% if((record.get('Default?')==true) && (record.get('Product Category')=="Tees and Tanks")){%> 
+                                            <div class="clothing-option" value= <%=record.id%>>
+                                                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                                    <img src="imgs\tee.jpg">
+                                                    <h6 class="name"> <%= record.get('Name') %> </h6>
+                                                    <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                                    <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                                </div>
+                                            </div>
+                                        <%}%>
                                    <%})%>
 
                                 </div>
@@ -61,14 +64,18 @@
 
                             <li id="sweaters-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
-                                    <div>
-                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
-                                            <h6 class="name"> Gilden Sweater </h6>
-                                            <p class="colors"> 15+ Colors... </p>
-                                            <p class="price">Starts at $19.99</p>
-                                        </div>
-                                    </div>
+                                    <% allRecords.forEach(function(record){ %> 
+                                        <% if((record.get('Default?')==true) && (record.get('Product Category')=="Sweaters and Sleeves")){%> 
+                                            <div class="clothing-option" value= <%=record.id%>>
+                                                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                                    <img src="imgs\tee.jpg">
+                                                    <h6 class="name"> <%= record.get('Name') %> </h6>
+                                                    <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                                    <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                                </div>
+                                            </div>
+                                        <%}%>
+                                   <%})%>
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
 
@@ -77,28 +84,36 @@
 
                             <li id="pants-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
-                                    <div>
-                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
-                                            <h6 class="name"> Gilden Pants </h6>
-                                            <p class="colors"> 17+ Colors... </p>
-                                            <p class="price">Starts at $7.99</p>
-                                        </div>
-                                    </div>
+                                    <% allRecords.forEach(function(record){ %> 
+                                        <% if((record.get('Default?')==true) && (record.get('Product Category')=="Pants and Shorts")){%> 
+                                            <div class="clothing-option" value= <%=record.id%>>
+                                                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                                    <img src="imgs\tee.jpg">
+                                                    <h6 class="name"> <%= record.get('Name') %> </h6>
+                                                    <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                                    <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                                </div>
+                                            </div>
+                                        <%}%>
+                                   <%})%>
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
                             </li>
 
                             <li id="accessories-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
-                                    <div>
-                                        <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
-                                            <h6 class="name"> Gilden Hat </h6>
-                                            <p class="colors"> 17+ Colors... </p>
-                                            <p class="price">Starts at $7.99</p>
-                                        </div>
-                                    </div>
+                                    <% allRecords.forEach(function(record){ %> 
+                                        <% if((record.get('Default?')==true) && (record.get('Product Category')=="Accessories and Hats")){%> 
+                                            <div class="clothing-option" value= <%=record.id%>>
+                                                <div class="uk-card uk-card-default uk-card-hover uk-card-body">
+                                                    <img src="imgs\tee.jpg">
+                                                    <h6 class="name"> <%= record.get('Name') %> </h6>
+                                                    <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                                    <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                                </div>
+                                            </div>
+                                        <%}%>
+                                   <%})%>
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
                             </li>
@@ -240,7 +255,7 @@
 
 
 
-        <div id="width-right" class="uk-width-1-3@m">
+        <div id="width-right" class="uk-width-1-3@m"> 
 
             <div id="clothing-card" class="uk-card uk-card-default uk-card-body">
                 <img src="imgs\tee.jpg">

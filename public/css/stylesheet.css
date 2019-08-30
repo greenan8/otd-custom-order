@@ -80,6 +80,7 @@ html{
         min-height: 150px;
         margin: 0 -3px;
         border-radius: 10px;
+        overflow: hidden;
     }
     .clothing-items img{
         height: 65%;
@@ -91,19 +92,20 @@ html{
         margin: 1.5vh;
         margin-top: 6px;
         padding: 0;
-        font-size: 1.2vw;
+        font-size: calc(10px + 0.4vw);
         font-weight: 700;
-        
+        height: calc((10px + 0.4vw)*2);
     }
     .clothing-items .colors{
-        margin: 0.5vh;
+        margin-top: 3vh;
+        margin-bottom: 0;
         padding: 0;
-        font-size: 1vw;
+        font-size: calc(9px + 0.5vw);
     }
     .clothing-items .price{
-        margin: 0.5vh;
+        margin-top: 0;
         padding: 0;
-        font-size: 1.1vw;
+        font-size: calc(9px + 0.5vw);
     }
     .clothing-menu-bottom-space{
         height: 8vh;
@@ -165,6 +167,14 @@ html{
 }
 #color-options{
     margin-top: 4vh;
+}
+
+#clothing-card img{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 
 /* ======================= Scroll Bar style ======================= */

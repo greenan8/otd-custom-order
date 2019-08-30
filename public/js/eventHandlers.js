@@ -1,3 +1,3 @@
 $(".clothing-option").click(function(){
-    alert($(this).attr('id'));
+    alert($(this).attr('value'));
   });
