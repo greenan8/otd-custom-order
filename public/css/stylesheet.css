@@ -87,10 +87,11 @@ html{
         width: 100%;
         border-radius: 10px 10px 0 0;
         object-fit: cover;
+        margin-bottom: 0.5vh;
     }
     .clothing-items .name{
-        margin: 1.5vh;
         margin-top: 6px;
+        margin-bottom: -0.6vh;
         padding: 0;
         font-size: calc(10px + 0.4vw);
         font-weight: 700;
