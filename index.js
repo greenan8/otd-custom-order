@@ -8,12 +8,35 @@ Airtable.configure({
 });
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
 var allRecords;
-clothingBase('Clothing').select({
-    view: 'Grid view'
-}).firstPage(function(err, records) {
-    if (err) { console.error(err); return; }
-    allRecords = records;
-});
+var allColors;
+var clothingRecords = {};
+
+ function getAirtableData(){  
+    clothingBase('Clothing').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+        allRecords = records;
+        records.forEach(function(record){
+            currentRecordName = record.get('Name');
+            if (!(currentRecordName in clothingRecords)){
+                clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
+            }
+            else{
+                clothingRecords[currentRecordName]['options'].push(record.id);
+            }
+        });
+    });  
+
+    clothingBase('Colors').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+            allColors = records;
+    }); 
+ };
+
+ getAirtableData()
 
 //setting up app (aka getting express, view engine, and static files good to go)
 var express = require('express');
@@ -24,7 +47,11 @@ app.use(express.static(__dirname + '/public'));
 
 //Load webapp
 app.get('/', (req, res) => {
-    res.render('index', {allRecords});
+    res.render('index', {allRecords, clothingRecords, allColors});
+});
+
+app.get('/allRecords', (req, res) => {
+    res.send(allRecords);
 });
 
 //post submission from user to order table
@@ -34,13 +61,15 @@ app.post('/', (req, res) => {
 
 //admin page is to resync data
 app.get('/admin', (req, res) => { 
-    clothingBase('Clothing').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        allRecords = records;
-        res.send(allRecords); 
-    });  
+    getAirtableData()
+    res.send(
+        "<h1>All Clothing Records</h1>" +
+        JSON.stringify(allRecords) +
+        "<h1>Clothing Defaults and ids</h1>" +
+        JSON.stringify(clothingRecords) +
+        "<h1>All Colors</h1>" +
+        JSON.stringify(allColors)
+        );
 });
 
 
