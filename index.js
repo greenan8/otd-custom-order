@@ -12,21 +12,6 @@ var allColors;
 var clothingRecords = {};
 
  function getAirtableData(){  
-    clothingBase('Clothing').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        allRecords = records;
-        records.forEach(function(record){
-            currentRecordName = record.get('Name');
-            if (!(currentRecordName in clothingRecords)){
-                clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
-            }
-            else{
-                clothingRecords[currentRecordName]['options'].push(record.id);
-            }
-        });
-    });  
 
     clothingBase('Colors').select({
         view: 'Grid view'
@@ -34,6 +19,31 @@ var clothingRecords = {};
         if (err) { console.error(err); return; }
             allColors = records;
     }); 
+
+    clothingBase('Clothing').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+        allRecords = records;
+        records.forEach(function(record){
+            var currentRecordName = record.get('Name');
+            if (!(currentRecordName in clothingRecords)){
+                clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
+            }
+            else{
+                // var colorID = ;
+
+                // var tempHex;
+                // allColors.forEach(function(colorRecord){
+                //     if (colorRecord.id == colorID){
+                //         tempHex = colorRecord.get('Hex');
+                //     }
+                // });
+                clothingRecords[currentRecordName]['options'].push({"id": record.id, "color": record.get('Color Option')});
+            }
+        });
+    });  
+
  };
 
  getAirtableData()
@@ -52,6 +62,14 @@ app.get('/', (req, res) => {
 
 app.get('/allRecords', (req, res) => {
     res.send(allRecords);
+});
+
+app.get('/allColors', (req, res) => {
+    res.send(allColors);
+});
+
+app.get('/clothingRecords', (req, res) => {
+    res.send(clothingRecords);
 });
 
 //post submission from user to order table

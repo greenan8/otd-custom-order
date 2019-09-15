@@ -19,7 +19,7 @@
 
 <body>
 
-    <div uk-grid>
+    <div class="content" uk-grid>
 
         <!-- ========================Left side main menu ======================== -->
         <div id="width-left" class="uk-width-2-3@m">
@@ -143,7 +143,7 @@
                             <span class="dot"></span>
                             <span class="dot"></span>
                             <% allColors.forEach(function(record){ %>
-                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" hidden></span>
+                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
                             <% }); %>
 
                             <hr>
@@ -152,7 +152,7 @@
                             <h4>Add Logo</h4>
                             <p>Upload a high quality PNG image of your custom logo</p>
                             <div class="js-upload" uk-form-custom>
-                                <input type="file" multiple>
+                                <input type="file" accept="image/png" id="logo-upload">
                                 <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </div>
                             <hr>
@@ -207,59 +207,100 @@
                             <hr>
                         </div>
 
+                        <div class="scroll-bottom-space"></div>
+                    </li>
 
 
                     <!-- ======================== 3. Info input form ======================== -->
-                    <li>
+                    <li id="order-details">
 
-                        <!-- <ul class="uk-child-width-expand second-level-menu" uk-tab>
-                            <li id="clothing-menu-left"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li id="clothing-menu-right"><a href="#">4</a></li>
-                        </ul>
-                        <ul class="uk-switcher">
-                            <li>1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                        </ul> -->
-                        <form>
-                            <fieldset class="uk-fieldset">
 
-                                <legend class="uk-legend">Form Example</legend>
+                        <div id="contact-details">
+                            <h4>Contact Details</h4>
+                            <p>Please fill out the contact detials below</p>
+                            
 
-                                <div class="uk-margin">
-                                    <input class="uk-input" type="text" placeholder="Input">
+                            <form class="uk-form-horizontal uk-margin-large">
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="full-name">Full Name</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="full-name" type="text" placeholder="John Doe">
                                 </div>
+                            </div>
 
-                                <div class="uk-margin">
-                                    <select class="uk-select">
-                                        <option>Option 01</option>
-                                        <option>Option 02</option>
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="email">Email Address</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="email" type="email" placeholder="@queensu.ca">
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="phone">Phone Number</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="phone" type="email" placeholder="999-999-9999">
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="ratified">Ratified Under</label>
+                                <div class="uk-form-controls">
+                                    <select class="uk-select" id="ratified">
+                                        <option></option>
+                                        <option>COMSOC</option>
+                                        <option>AMS</option>
                                     </select>
                                 </div>
+                            </div>
+                            </form>
 
-                                <div class="uk-margin">
-                                    <textarea class="uk-textarea" rows="5" placeholder="Textarea"></textarea>
-                                </div>
+                        <hr>
 
-                                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                    <label><input class="uk-radio" type="radio" name="radio2" checked> A</label>
-                                    <label><input class="uk-radio" type="radio" name="radio2"> B</label>
-                                </div>
+                    </div>
 
-                                <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid">
-                                    <label><input class="uk-checkbox" type="checkbox" checked> A</label>
-                                    <label><input class="uk-checkbox" type="checkbox"> B</label>
-                                </div>
 
-                                <div class="uk-margin">
-                                    <input class="uk-range" type="range" value="2" min="0" max="10" step="0.1">
-                                </div>
+                    <div id="size-details">
+                            <h4>Order Details</h4>
+                            <p>Please review and complete the order details below</p>
+                            
 
-                            </fieldset>
+                        <form class="uk-grid-small" uk-grid>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="xsmall">Extra Small</label>
+                                <input class="uk-input" type="number" placeholder="0" id="xsmall">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="small">Small</label>
+                                <input class="uk-input" type="number" placeholder="0" id="small">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="medium">Medium</label>
+                                <input class="uk-input" type="number" placeholder="0" id="large">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="large">Large</label>
+                                <input class="uk-input" type="number" placeholder="0" id="large">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="xlarge">Extra large</label>
+                                <input class="uk-input" type="number" placeholder="0" id="xlarge">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="2xlarge">2 Extra Large</label>
+                                <input class="uk-input" type="number" placeholder="0" id="2xlarge">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="3-5xlarge">3-5 Extra Large</label>
+                                <input class="uk-input" type="number" placeholder="0" id="3-5xlarge">
+                            </div>
+                            <div class="uk-width-1-4@s">
+                                <label class="uk-form-label" for="onesize">One Size Fits All</label>
+                                <input class="uk-input" type="number" placeholder="0" id="onesize">
+                            </div>
                         </form>
+
+                    </div>
+                    <div class="scroll-bottom-space"></div>
                     </li>
                 </ul>
 
@@ -276,7 +317,12 @@
         <div id="width-right" class="uk-width-1-3@m">
 
             <div id="clothing-card" class="uk-card uk-card-default uk-card-body">
+                
+                <div id="live-coming-soon">
+                    <h2>Live preview is coming soon!</h2>
+                </div>
                 <img src="imgs\tee.jpg">
+                
             </div>
             <div id="color-options">
                 <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
@@ -285,6 +331,11 @@
         </div>
     </div>
 
+    <div id="submit-footer" class="uk-card uk-card-default">
+        <div id="right-submit">
+            <button class="uk-button uk-button-default" >Submit Order</button>
+            </div>
+    </div>
 
 
 
@@ -298,21 +349,6 @@
     <script src="js\uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script type='text/javascript'>
-        var allrecord;
-        
-        fetch("/allRecords")
-        .then(response => {
-            response.json().then(json => {
-                allRecords = json;   
-            })
-        })
-
-
-        // var allRecords = <%- JSON.stringify(allRecords) %>;
-        // var allColors = <%- JSON.stringify(allColors) %>;
-        // var clothingRecords = <%- JSON.stringify(clothingRecords) %>; 
-    </script>
     <script src="js\eventHandlers.js"></script>
 </body>
 
