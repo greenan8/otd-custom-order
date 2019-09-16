@@ -32,7 +32,10 @@ fetch("/clothingRecords")
     })
 })
 
-
+$("#start-design").click(function(){
+  $("#instruct").fadeOut();
+  $("#instruct-bg").fadeOut();
+});
 
 
 $(".clothing-option").click(function(){

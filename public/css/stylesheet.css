@@ -1,6 +1,7 @@
 html{
     font-family: 'Open Sans', sans-serif;
     background-color: rgb(248, 248, 248);
+    overflow: hidden;
 }
 
 /* =======================Main Card Styling ======================= */
@@ -132,7 +133,7 @@ html{
     }
 
     .scroll-bottom-space{
-        height: 3vh;
+        height: 7vh;
     }
 
     #customization-items{
@@ -165,6 +166,8 @@ html{
     #contact-details form, #size-details form{
         padding-left: 5vw;
         padding-right: 5vw;
+        margin-top: 0!important;
+        margin-bottom: 5vh;
     }
     
     form label, form div{
@@ -176,6 +179,9 @@ html{
         border-color: #cf3d3d!important;
     }
 
+    form select:focus{
+        border-color: #cf3d3d!important;
+    }
   
 
     /* Order Details Styling */
@@ -253,8 +259,6 @@ html{
     padding: 0;
 }
 
-
-
 #right-submit{
     text-align: right;
     padding-right: 12vw;
@@ -266,6 +270,7 @@ html{
     border-radius: 20px;
     height: 5vh;
     font-weight: 700;
+    font-size: calc(8px + 0.3vw);
 }
 
 #right-submit button:hover{
@@ -274,11 +279,80 @@ html{
     background-color:#cf3d3d;
 }
 
+/* ======================= Intro Instructions ======================= */
 
+#instruct-bg{
+    position: absolute;
+    top: 0;
+    left:0;
+    background-color: rgba(200,200,200,0.85);
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+}
 
+#instruct{
+    position: absolute;
+    top: 20vh;
+    left: 22vw;
+    width: 58vw;
+    height: 60vh;
+    z-index: 100;  
+    border-radius: 30px;
+    text-align: center;
+}
 
+#instruct .uk-card{
+    left: 7vw;
+    width: 44vw;
+    height: 60vh; 
+    border-radius: 30px;
+    padding: 0;
+}
 
+#instruct a{
+    color: black;
+} 
 
+#instruct ul{
+    width: 50vw;
+    height: 60vh; 
+    border-radius: 30px;
+    text-align: center;
+}
+#instruct li{
+    width: 40vw;
+    height: 50vh;
+    padding: 5vh 2vw;
+    
+}
+#instruct h1{
+    font-size: calc(30px + 0.6vw);
+    margin-top: 1vw;
+    color: black;
+}
+
+#instruct p{
+    margin-top: 0.2vw;
+    font-size: calc(11px + 0.6vw);
+}
+
+#instruct .instruct-img{
+    height: 20vh;
+}
+
+#instruct button{
+    margin-top: 3vh;
+    border: none;
+    color: white;
+    background-color:#cf3d3d;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+#instruct button:hover{
+    background-color: #a72727;
+}
 /* ======================= Scroll Bar style ======================= */
     /* width */
     ::-webkit-scrollbar {

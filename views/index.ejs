@@ -19,7 +19,35 @@
 
 <body>
 
-    <div id="instruct"></div>
+    <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
+        <div class="fade-in-target" uk-slideshow="animation: fade">
+
+            <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" >
+                <div class="uk-card uk-card-default uk-card-body">
+                <ul class="uk-slideshow-items">
+                    <li>
+                        <img src="imgs\otd-logo.png" alt="" class="instruct-img">
+                        <h1>Welcome!</h1>
+                        <p>Welcome to OTD's custom order system. Read through these short instructions before getting start on designing your own custom order, reviewing a rough prive estimate, and submitting your 
+                            design to start a dialgue with one of our custom sales representives.
+                        </p>
+                    </li>
+                    <li>
+                        
+                    </li>
+                    <li>
+                       
+                    </li>
+                </ul>
+                </div>
+
+                <a class="uk-position-center-left uk-position-small" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                <a class="uk-position-center-right uk-position-small" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+            </div>
+        
+        </div>
+        <button class="uk-button uk-button-default fade-in-target" id="start-design">START YOUR DESIGN</button>
+    </div>
     <div id="instruct-bg"></div>
 
     <div class="content" uk-grid>
