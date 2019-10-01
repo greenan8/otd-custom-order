@@ -49,7 +49,9 @@
         <button class="uk-button uk-button-default fade-in-target" id="start-design">START YOUR DESIGN</button>
     </div>
     <div id="instruct-bg"></div>
-
+    <div id="beta" title="You may find minor bugs and some functionality has not yet been implemented.&#013; If you come across any major issues, email: otdsales@gmail.com">
+        <p>Beta</p>
+    </div>
     <div class="content" uk-grid>
 
         <!-- ========================Left side main menu ======================== -->
@@ -194,11 +196,20 @@
                         <div id="custom-logo-position">
                             <h4>Logo Position</h4>
                             <p>Select from the avaliable locations where you would like your logo printed.</p>
-                            <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
-                            <img src="imgs/p1.png">
-                            <img src="imgs/p2.png">
-                            <img src="imgs/p3.png">
-                            <span uk-icon="icon: chevron-right; ratio: 1.5"></span>
+                            <form>
+                                <div uk-form-custom="target: > * > span:first-child">
+                                    <select>
+                                        <option value="">Please select...</option>
+                                        <option value="center">Center</option>
+                                        <option value="left-chest">left Chest</option>
+                                        <option value="right-chest">Right Chest</option>
+                                    </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                        <span uk-icon="icon: chevron-down"></span>
+                                    </button>
+                                </div>
+                            </form>
                             <hr>
                         </div>
                         <div id="custom-logo-print">
@@ -228,8 +239,8 @@
                             <hr>
                         </div>
                         <div id="custom-list-options">
-                            <h4>Logo Position</h4>
-                            <p>Select from the avaliable locations where you would like your logo printed.</p>
+                            <h4>Text Position</h4>
+                            <p>Select from the avaliable locations where you would like your custom text printed.</p>
                             <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
                             <img src="imgs/p1.png">
                             <img src="imgs/p2.png">
@@ -269,7 +280,14 @@
                             <div class="uk-margin">
                                 <label class="uk-form-label" for="phone">Phone Number</label>
                                 <div class="uk-form-controls">
-                                    <input class="uk-input" id="phone" type="email" placeholder="999-999-9999">
+                                    <input class="uk-input" id="phone" type="phone" placeholder="999-999-9999">
+                                </div>
+                            </div>
+
+                            <div class="uk-margin">
+                                <label class="uk-form-label" for="org">Your Organization</label>
+                                <div class="uk-form-controls">
+                                    <input class="uk-input" id="org" type="tel" placeholder="Oil Thigh Designs">
                                 </div>
                             </div>
 
@@ -277,9 +295,10 @@
                                 <label class="uk-form-label" for="ratified">Ratified Under</label>
                                 <div class="uk-form-controls">
                                     <select class="uk-select" id="ratified">
-                                        <option></option>
-                                        <option>COMSOC</option>
-                                        <option>AMS</option>
+                                        <option value ="0"></option>
+                                        <option value ="1">COMSOC</option>
+                                        <option value ="0">AMS</option>
+                                        <option value ="0">Neither</option>
                                     </select>
                                 </div>
                             </div>
@@ -369,7 +388,7 @@
                 <h2>$0.00</h2>
             </div>
             <div id="right-submit">
-                <button class="uk-button uk-button-default" >Submit Order</button>
+                <button class="uk-button uk-button-default" ><p>Submit Order</p></button>
             </div>
         </div>
     </div>

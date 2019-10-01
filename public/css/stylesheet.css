@@ -43,12 +43,12 @@ html{
         background-color: #ebebeb!important;
     }
     #top-level-menu button.uk-active{
-        background-color: #cf3d3d!important;
+        background-color: #A22C38!important;
         color: white!important;
         border: none;
     } 
     #top-level-menu button:hover{
-        background-color:  #cf3d3d!important;
+        background-color:  #A22C38!important;
         color: white;
         border: none;
     }
@@ -63,7 +63,7 @@ html{
         height: 3vh!important;
     } 
     .second-level-menu li.uk-active a{
-        border-color: #cf3d3d!important;
+        border-color: #A22C38!important;
     }
 
     /* Choose Apparel Styling */
@@ -148,7 +148,7 @@ html{
         margin-right: 20px;
     }
     #customization-items img:hover{
-        border-color: #cf3d3d;
+        border-color: #A22C38;
     }
     #custom-logo-print{
         padding: 0 20px;
@@ -176,13 +176,25 @@ html{
 
 
     form input.uk-input:focus{
-        border-color: #cf3d3d!important;
+        border-color: #A22C38!important;
     }
 
     form select:focus{
-        border-color: #cf3d3d!important;
+        border-color: #A22C38!important;
     }
   
+    #beta{
+        position:absolute;
+        top: 0;
+        right: 8vw;
+        background-color: #A22C38;
+        border-radius: 0 0 10px 10px;
+        color: white;
+        height: 3.5vh;
+        width: 12vh;
+        font-size: calc(10px + 0.5vw);
+        text-align: center;
+    }
 
     /* Order Details Styling */
    
@@ -246,37 +258,57 @@ html{
 #left-submit{
     text-align: left;
     padding-left: 4vw;
+    margin-top: 1vh;
 }
 
 #left-submit p{
     margin: 0;
     padding: 0;
-    margin-top: 15px;
-   
+    font-size: 2vh;
+  
 }
 #left-submit h2{
     margin: 0;
+    margin-top: -0.5vh;
     padding: 0;
+    font-size: 4.5vh;
 }
 
 #right-submit{
     text-align: right;
-    padding-right: 12vw;
+    padding-right: 11vw;
+
+    top: 0;
+
 }
 #right-submit button{
-    margin-top: 25px;
-    border: 1px solid #cf3d3d;
-    color: #cf3d3d;
+    
     border-radius: 20px;
+    margin-top: 2.5vh;
     height: 5vh;
+    width: 200px;
+    border: 1px solid #A22C38;
+    color: #A22C38;
+
+    position: relative;
+    padding: 0;
+
+}
+
+#right-submit button p{
+    font-size: calc(8px + 1vh);
     font-weight: 700;
-    font-size: calc(8px + 0.3vw);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    text-align: center;
 }
 
 #right-submit button:hover{
     border: none;
     color: white;
-    background-color:#cf3d3d;
+    background-color:#A22C38;
 }
 
 /* ======================= Intro Instructions ======================= */
@@ -345,13 +377,13 @@ html{
     margin-top: 3vh;
     border: none;
     color: white;
-    background-color:#cf3d3d;
+    background-color:#A22C38;
     border-radius: 20px;
     font-weight: 700;
 }
 
 #instruct button:hover{
-    background-color: #a72727;
+    background-color: #A22C38;
 }
 /* ======================= Scroll Bar style ======================= */
     /* width */
