@@ -6,12 +6,13 @@ Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
     apiKey: 'YOUR_API_KEY'
 });
+
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
 var allRecords;
 var allColors;
 var clothingRecords = {};
 
- function getAirtableData(){  
+function getAirtableData(){  
 
     clothingBase('Colors').select({
         view: 'Grid view'
@@ -26,27 +27,36 @@ var clothingRecords = {};
         if (err) { console.error(err); return; }
         allRecords = records;
         records.forEach(function(record){
-            var currentRecordName = record.get('Name');
-            if (!(currentRecordName in clothingRecords)){
-                clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
-            }
-            else{
-                // var colorID = ;
-
-                // var tempHex;
-                // allColors.forEach(function(colorRecord){
-                //     if (colorRecord.id == colorID){
-                //         tempHex = colorRecord.get('Hex');
-                //     }
-                // });
-                clothingRecords[currentRecordName]['options'].push({"id": record.id, "color": record.get('Color Option')});
-            }
+            colorOptions = record.get('Color Options');
+            currentRecordName = record.get('Name');
+            console.log(currentRecordName);
+            firstLoop = true;
+            colorOptions && colorOptions.forEach(function(option){
+                (firstLoop) && (clothingRecords[currentRecordName] = {'id': record.id, 'options': []});
+                firstLoop = false
+                clothingRecords[currentRecordName]['options'].push(option); 
+                console.log(clothingRecords[currentRecordName]['options']);   
+            });
         });
+
+
+        // allRecords = records;
+        // records.forEach(function(record){
+        //     var currentRecordName = record.get('Name');
+        //     if (!(currentRecordName in clothingRecords)){
+        //         clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
+        //     }
+        //     else{
+        //         clothingRecords[currentRecordName]['options'].push({"id": record.id, "color": record.get('Color Option')});
+        //     }
+        // });
     });  
 
- };
+};
 
- getAirtableData()
+getAirtableData()
+
+
 
 //setting up app (aka getting express, view engine, and static files good to go)
 var express = require('express');
@@ -58,23 +68,6 @@ app.use(express.static(__dirname + '/public'));
 //Load webapp
 app.get('/', (req, res) => {
     res.render('index', {allRecords, clothingRecords, allColors});
-});
-
-app.get('/allRecords', (req, res) => {
-    res.send(allRecords);
-});
-
-app.get('/allColors', (req, res) => {
-    res.send(allColors);
-});
-
-app.get('/clothingRecords', (req, res) => {
-    res.send(clothingRecords);
-});
-
-//post submission from user to order table
-app.post('/', (req, res) => {
-    res.render('index');
 });
 
 //admin page is to resync data
@@ -89,6 +82,23 @@ app.get('/admin', (req, res) => {
         JSON.stringify(allColors)
         );
 });
+
+//sending clothing records to front end js
+app.get('/allRecords', (req, res) => {
+    res.send(allRecords);
+});
+
+app.get('/allColors', (req, res) => {
+    res.send(allColors);
+});
+
+app.get('/clothingRecords', (req, res) => {
+    res.send(clothingRecords);
+});
+
+
+//Mailing submitted form to otd email
+
 
 
 

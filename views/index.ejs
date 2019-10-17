@@ -28,7 +28,7 @@
                     <li>
                         <img src="imgs\otd-logo.png" alt="" class="instruct-img">
                         <h1>Welcome!</h1>
-                        <p>Welcome to OTD's custom order system. Read through these short instructions before getting start on designing your own custom order, reviewing a rough prive estimate, and submitting your 
+                        <p>Welcome to OTD's custom order system. Read through these short instructions before getting start on designing your own custom order, reviewing a rough price estimate, and submitting your 
                             design to start a dialgue with one of our custom sales representives.
                         </p>
                     </li>
@@ -89,13 +89,13 @@
                             <li id="tees-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
 
-                                    <!-- TODO: Make one big loop with cases/ifs -->
+                                    
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if((record.get('Default?')==true) && (record.get('Product Category')=="Tees and Tanks")){%>
+                                    <% if(record.get('Product Category')=="Tees and Tanks"){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= record.get('Name') %> </h6>
+                                            <img src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <h6 class="name"> <%= record.get('Display Name') %> </h6>
                                             <p class="colors"><%= record.get('Count') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('Starting Price') %>.00</p>
                                         </div>
@@ -110,12 +110,12 @@
                             <li id="sweaters-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if((record.get('Default?')==true) && (record.get('Product Category')=="Sweaters and Sleeves")){%>
+                                    <% if(record.get('Product Category')=="Sweaters and Sleeves"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
                                         </div>
                                     </div>
@@ -130,12 +130,12 @@
                             <li id="pants-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if((record.get('Default?')==true) && (record.get('Product Category')=="Pants and Shorts")){%>
+                                    <% if(record.get('Product Category')=="Pants and Shorts"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
                                         </div>
                                     </div>
@@ -148,12 +148,12 @@
                             <li id="accessories-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if((record.get('Default?')==true) && (record.get('Product Category')=="Accessories and Hats")){%>
+                                    <% if(record.get('Product Category')=="Accessories and Hats"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
                                         </div>
                                     </div>
@@ -169,6 +169,15 @@
 
                     <!-- ======================== 2. Customization ======================== -->
                     <li id="customization-items">
+                        <div id="custom-quantity">
+                            <h4>Order Quantity</h4>
+                            <p>Please review and complete the order details below</p>
+                            <div class="uk-form-controls">
+                                    <input class="uk-input" id="quantity" type="number" placeholder="69">
+                            </div>
+                            <hr>
+                        </div>
+                       
                         <div id="custom-color">
                             <h4>Select Clothing Color</h4>
                             <span class="dot"></span>
@@ -176,7 +185,7 @@
                             <span class="dot"></span>
                             <span class="dot"></span>
                             <% allColors.forEach(function(record){ %>
-                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
+                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> ></span>
                             <% }); %>
 
                             <hr>
@@ -190,9 +199,7 @@
                             </div>
                             <hr>
                         </div>
-                        <div id="custom-logo-print">
-
-                        </div>
+                        
                         <div id="custom-logo-position">
                             <h4>Logo Position</h4>
                             <p>Select from the avaliable locations where you would like your logo printed.</p>
@@ -212,23 +219,32 @@
                             </form>
                             <hr>
                         </div>
+
                         <div id="custom-logo-print">
                             <h4>Screen Print or Stitching</h4>
                             <div class="uk-column-1-2 uk-column-divider">
-                                <p>Screen Print is recommended for logos with many colors. Cost is calculated through %
-                                    of your image that is not transparent.</p>
-                                <p>Stitching is recommended for logos with less colors. Cost is calculated through the
-                                    number of colors detected in your logo.</p>
-
+                                <p>
+                                    Screen Print is recommended for logos with less colors. Cost is calculated through the
+                                    number of colors detected in your logo.
+                                </p>
+                                <p>
+                                    Stitching is recommended for logos with many colors. Cost is calculated through %
+                                    of your image that is not transparent. 
+                                </p>
                             </div>
                             <div class="uk-column-1-2 uk-column-divider">
                                 <h1 class="uk-text-danger uk-text-large">0%</h1>
                                 <h1 class="uk-text-danger uk-text-large">3 Colors</h1>
                             </div>
+                            <div class="uk-column-1-2 uk-column-divider">
+                                <div> <button class="uk-button">Select Screen Print</button> </div>
+                                <div> <button class="uk-button">Select Stitching</button> </div>
+                            </div>
 
 
                             <hr>
                         </div>
+
                         <div id="custom-list-upload">
                             <h4>Custom Text</h4>
                             <p>Upload a csv or excel file. <a href="">Click here</a> to download template.</p>
@@ -238,15 +254,24 @@
                             </div>
                             <hr>
                         </div>
+
                         <div id="custom-list-options">
                             <h4>Text Position</h4>
                             <p>Select from the avaliable locations where you would like your custom text printed.</p>
-                            <span uk-icon="icon: chevron-left; ratio: 1.5"></span>
-                            <img src="imgs/p1.png">
-                            <img src="imgs/p2.png">
-                            <img src="imgs/p3.png">
-                            <span uk-icon="icon: chevron-right; ratio: 1.5"></span>
-                            <hr>
+                            <form>
+                                <div uk-form-custom="target: > * > span:first-child">
+                                    <select>
+                                        <option value="">Please select...</option>
+                                        <option value="center">Center</option>
+                                        <option value="left-chest">left Chest</option>
+                                        <option value="right-chest">Right Chest</option>
+                                    </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                        <span uk-icon="icon: chevron-down"></span>
+                                    </button>
+                                </div>
+                            </form>
                         </div>
 
                         <div class="scroll-bottom-space"></div>
@@ -303,53 +328,10 @@
                                 </div>
                             </div>
                             </form>
-
-                        <hr>
-
                     </div>
 
 
-                    <div id="size-details">
-                            <h4>Order Details</h4>
-                            <p>Please review and complete the order details below</p>
-                            
-
-                        <form class="uk-grid-small" uk-grid>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="xsmall">Extra Small</label>
-                                <input class="uk-input" type="number" placeholder="0" id="xsmall">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="small">Small</label>
-                                <input class="uk-input" type="number" placeholder="0" id="small">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="medium">Medium</label>
-                                <input class="uk-input" type="number" placeholder="0" id="large">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="large">Large</label>
-                                <input class="uk-input" type="number" placeholder="0" id="large">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="xlarge">Extra large</label>
-                                <input class="uk-input" type="number" placeholder="0" id="xlarge">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="2xlarge">2 Extra Large</label>
-                                <input class="uk-input" type="number" placeholder="0" id="2xlarge">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="3-5xlarge">3-5 Extra Large</label>
-                                <input class="uk-input" type="number" placeholder="0" id="3-5xlarge">
-                            </div>
-                            <div class="uk-width-1-4@s">
-                                <label class="uk-form-label" for="onesize">One Size Fits All</label>
-                                <input class="uk-input" type="number" placeholder="0" id="onesize">
-                            </div>
-                        </form>
-
-                    </div>
+                    
                     <div class="scroll-bottom-space"></div>
                     </li>
                 </ul>

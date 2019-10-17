@@ -43,7 +43,7 @@ $(".clothing-option").click(function(){
   var colorList;
   
   for(record in clothingRecords){
-    if(clothingRecords[record].default == currentID){
+    if(clothingRecords[record].id == currentID){
       colorList = clothingRecords[record].options;
       break;
     }
@@ -51,7 +51,7 @@ $(".clothing-option").click(function(){
   $("span.dot").attr("hidden",true);
 
   colorList.forEach(e => {
-    $("span.dot#" + e.color).attr("hidden",false).attr("value", e.id);   
+    $("span.dot#" + e).attr("hidden",false);   
   });
 
 });
