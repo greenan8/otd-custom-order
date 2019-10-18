@@ -10,6 +10,7 @@ Airtable.configure({
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
 var allRecords;
 var allColors;
+var allPrintOptions;
 var clothingRecords = {};
 
 function getAirtableData(){  
@@ -21,21 +22,38 @@ function getAirtableData(){
             allColors = records;
     }); 
 
+    clothingBase('Print').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+            allPrintOptions = records;
+    }); 
+
     clothingBase('Clothing').select({
         view: 'Grid view'
     }).firstPage(function(err, records) {
         if (err) { console.error(err); return; }
         allRecords = records;
         records.forEach(function(record){
-            colorOptions = record.get('Color Options');
-            currentRecordName = record.get('Name');
-            console.log(currentRecordName);
-            firstLoop = true;
+        
+            // currentRecordName = record.get('Name');
+            // clothingRecords[currentRecordName] = {'id': record.id, 'colorOptions': [], 'logoPrintOptions': [], 'textPrintOptions': []}
+            clothingRecords[record.id] = {'colorOptions': [], 'logoPrintOptions': [], 'textPrintOptions': [], 'amsPrice': record.get('AMS Price'), 'comPrice': record.get('COM Price')}
+            
+           colorOptions = record.get('Color Options');
             colorOptions && colorOptions.forEach(function(option){
-                (firstLoop) && (clothingRecords[currentRecordName] = {'id': record.id, 'options': []});
-                firstLoop = false
-                clothingRecords[currentRecordName]['options'].push(option); 
-                console.log(clothingRecords[currentRecordName]['options']);   
+                clothingRecords[record.id]['colorOptions'].push(option); 
+            });
+
+            logoPrintOptions = record.get('Logo Print Options');
+            logoPrintOptions && logoPrintOptions.forEach(function(option){
+                clothingRecords[record.id]['logoPrintOptions'].push(option); 
+                console.log(option);
+            });
+
+            textPrintOptions = record.get('Text Print Options');
+            textPrintOptions && textPrintOptions.forEach(function(option){
+                clothingRecords[record.id]['textPrintOptions'].push(option); 
             });
         });
 
@@ -67,7 +85,7 @@ app.use(express.static(__dirname + '/public'));
 
 //Load webapp
 app.get('/', (req, res) => {
-    res.render('index', {allRecords, clothingRecords, allColors});
+    res.render('index', {allRecords, clothingRecords, allColors, allPrintOptions});
 });
 
 //admin page is to resync data
@@ -96,6 +114,9 @@ app.get('/clothingRecords', (req, res) => {
     res.send(clothingRecords);
 });
 
+app.get('/allPrintOptions', (req, res) => {
+    res.send(allPrintOptions);
+});
 
 //Mailing submitted form to otd email
 

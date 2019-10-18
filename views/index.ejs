@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 
-
-
-
 <head>
     <!-- <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
@@ -15,28 +12,60 @@
 </head>
 
 
-
-
 <body>
 
+    <!-- ======================== Opening Welcome Menu ======================== -->
     <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
-        <div class="fade-in-target" uk-slideshow="animation: fade">
+        <div class="fade-in-target" uk-slideshow="animation: fade;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" >
                 <div class="uk-card uk-card-default uk-card-body">
                 <ul class="uk-slideshow-items">
                     <li>
-                        <img src="imgs\otd-logo.png" alt="" class="instruct-img">
+                        <img src="imgs\instruct-logo.png" alt="" class="instruct-img">
                         <h1>Welcome!</h1>
-                        <p>Welcome to OTD's custom order system. Read through these short instructions before getting start on designing your own custom order, reviewing a rough price estimate, and submitting your 
+                        <p>
+                            Welcome to OTD's custom order system. Read through these short instructions before getting start 
+                            on designing your own custom order, reviewing a rough price estimate, and submitting your 
                             design to start a dialgue with one of our custom sales representives.
                         </p>
                     </li>
                     <li>
-                        
+                        <img src="imgs\instruct-1.svg" alt="" class="instruct-img"> 
+                        <h1>Step One</h1>
+                        <p>
+                             Step one is to select what garment you would like ordered. If you don't see what exactly meets your 
+                             needs pick the closest garment possible and let us know what you are specifically looking for in the "additional
+                             notes" section. 
+                        </p>
                     </li>
                     <li>
-                       
+                        <img src="imgs\instruct-2.svg" alt="" class="instruct-img"> 
+                        <h1>Step Two</h1>
+                        <p>
+                            Step two is giving us info that helps us stay in contact and also calculate a rough estimate. 
+                            Make sure to fill out all detail so that you are able to submit your order when finished.
+                        </p>
+                    </li>
+                    <li>
+                        <img src="imgs\instruct-3.svg" alt="" class="instruct-img"> 
+                        <h1>Step Three</h1>
+                        <p>
+                            Step three is inputing your custom selections to make your order yours.
+                            Once done make sure to hit submit at the bottom and it will begin an email thread
+                            between our custom sales team and the email details you provided.
+                        </p>
+                    </li>
+                    <li>
+                        <img src="imgs\instruct-email.svg" alt="" class="instruct-img"> 
+                        <h1>Contact Us</h1>
+                        <p>
+                            This app is currently in Beta and if you come across any bugs
+                            or major issues when trying to fill out your details, please email us
+                            at:
+                            <br/> 
+                            <a href="mailto:otdsales@gmail.com">otdsales@gmail.com</a>
+                        </p>
                     </li>
                 </ul>
                 </div>
@@ -71,7 +100,7 @@
                     <!-- ======================== 1. Garment Choices ======================== -->
                     <li>
 
-                        <!-- ======================== Garment Menu ======================== -->
+                        <!--  Garment Menu  -->
                         <ul class="uk-child-width-expand second-level-menu" uk-tab>
                             <li id="clothing-menu-left"><a href="#">Tees and Tanks</a></li>
                             <li><a href="#">Sweaters and Sleeves</a></li>
@@ -89,7 +118,7 @@
                                     <% if(record.get('Product Category')=="Tees and Tanks"){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <img class="clothing-option" value=<%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
                                             <h6 class="name"> <%= record.get('Display Name') %> </h6>
                                             <p class="colors"><%= record.get('Count') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('Starting Price') %>.00</p>
@@ -108,7 +137,7 @@
                                     <% if(record.get('Product Category')=="Sweaters and Sleeves"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
+                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
                                             <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
@@ -128,7 +157,7 @@
                                     <% if(record.get('Product Category')=="Pants and Shorts"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
+                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
                                             <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
@@ -146,7 +175,7 @@
                                     <% if(record.get('Product Category')=="Accessories and Hats"){%>
                                     <div class="clothing-option" value=<%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img src="imgs\tee.jpg">
+                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
                                             <h6 class="name"> <%= record.get('Name') %> </h6>
                                             <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
@@ -164,6 +193,14 @@
                     <!-- ======================== 2. Info input form ======================== -->
                     <li id="order-details">
 
+                        <div id="custom-quantity">
+                            <h4>Order Quantity</h4>
+                            <p>Please review and complete the order details below</p>
+                            <div class="uk-form-controls">
+                                    <input class="uk-input" id="quantity" type="number" placeholder="69">
+                        </div>
+
+                        <hr>
 
                         <div id="contact-details">
                             <h4>Contact Details</h4>
@@ -203,23 +240,17 @@
                                 <label class="uk-form-label" for="ratified">Ratified Under</label>
                                 <div class="uk-form-controls">
                                     <select class="uk-select" id="ratified">
-                                        <option value ="0"></option>
-                                        <option value ="1">COMSOC</option>
-                                        <option value ="0">AMS</option>
-                                        <option value ="0">Neither</option>
+                                        <option value =""></option>
+                                        <option value ="comsoc">COMSOC</option>
+                                        <option value ="ams">AMS</option>
+                                        <option value ="neither">Neither</option>
                                     </select>
                                 </div>
                             </div>
-                            <hr>
-                            </form>
-
-                            <div id="custom-quantity">
-                            <h4>Order Quantity</h4>
-                            <p>Please review and complete the order details below</p>
-                            <div class="uk-form-controls">
-                                    <input class="uk-input" id="quantity" type="number" placeholder="69">
+                            <div class="uk-margin">
+                                <textarea class="uk-textarea" rows="5" placeholder="Additional Notes" id="notes"></textarea>
                             </div>
-                            
+                            </form>   
                         </div>
                     </div>
 
@@ -237,7 +268,7 @@
                             <span class="dot"></span>
                             <span class="dot"></span>
                             <% allColors.forEach(function(record){ %>
-                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> ></span>
+                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
                             <% }); %>
 
                             <hr>
@@ -339,7 +370,7 @@
 
 
 
-
+        <!-- ======================== live Preview ======================== -->
         <div id="width-right" class="uk-width-1-3@m">
 
             <div id="clothing-card" class="uk-card uk-card-default uk-card-body">
@@ -357,11 +388,12 @@
         </div>
     </div>
 
+    <!-- ======================== Submit Footer ======================== -->
     <div id="submit-footer" class="uk-card uk-card-default">
         <div class="uk-column-1-2">
             <div id="left-submit">
                 <p>Estimated Total</p>
-                <h2>$0.00</h2>
+                <h2 id="estimate">$0.00</h2>
             </div>
             <div id="right-submit">
                 <button class="uk-button uk-button-default" ><p>Submit Order</p></button>
@@ -376,7 +408,7 @@
 
 
 
-    <!-- UIkit JS -->
+    <!-- UIkit JS and JS -->
     <script src="js\uikit.min.js"></script>
     <script src="js\uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
