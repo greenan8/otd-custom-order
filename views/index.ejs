@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\uikit.min.css" />
     <link rel="stylesheet" href="css\stylesheet.css" />
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 
@@ -60,7 +61,7 @@
                         <img src="imgs\instruct-email.svg" alt="" class="instruct-img"> 
                         <h1>Contact Us</h1>
                         <p>
-                            This app is currently in Beta and if you come across any bugs
+                            This app is currently in beta. If you come across any bugs
                             or major issues when trying to fill out your details, please email us
                             at:
                             <br/> 
@@ -75,7 +76,10 @@
             </div>
         
         </div>
-        <button class="uk-button uk-button-default fade-in-target" id="start-design">START YOUR DESIGN</button>
+        <div class="center-recaptcha">
+            <div class="g-recaptcha fade-in-target" data-sitekey="6LeMZb8UAAAAAJwQpUepBeucriP8rFJqVIG6Gy3v" data-callback="recaptchaCallback"></div>
+        </div>
+        <button class="uk-button uk-button-default fade-in-target" id="start-design" disabled>START YOUR DESIGN</button>
     </div>
     <div id="instruct-bg"></div>
     <div id="beta" title="You may find minor bugs and some functionality has not yet been implemented.&#013; If you come across any major issues, email: otdsales@gmail.com">
@@ -248,7 +252,8 @@
                                 </div>
                             </div>
                             <div class="uk-margin">
-                                <textarea class="uk-textarea" rows="5" placeholder="Additional Notes" id="notes"></textarea>
+                                    <label class="uk-form-label" for="notes">Additional Notes</label>
+                                <textarea class="uk-textarea" rows="5" placeholder="" id="notes"></textarea>
                             </div>
                             </form>   
                         </div>
@@ -288,11 +293,9 @@
                             <p>Select from the avaliable locations where you would like your logo printed.</p>
                             <form>
                                 <div uk-form-custom="target: > * > span:first-child">
-                                    <select>
+                                    <select id="logo-position-options">
                                         <option value="">Please select...</option>
-                                        <option value="center">Center</option>
-                                        <option value="left-chest">left Chest</option>
-                                        <option value="right-chest">Right Chest</option>
+                            
                                     </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
                                         <span></span>
@@ -335,7 +338,7 @@
                                 <input type="file" multiple>
                                 <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </div>
-                            <hr>
+                            <hr id="custom-list-hr">
                         </div>
 
                         <div id="custom-list-options">
@@ -343,11 +346,9 @@
                             <p>Select from the avaliable locations where you would like your custom text printed.</p>
                             <form>
                                 <div uk-form-custom="target: > * > span:first-child">
-                                    <select>
+                                    <select id="text-position-options">
                                         <option value="">Please select...</option>
-                                        <option value="center">Center</option>
-                                        <option value="left-chest">left Chest</option>
-                                        <option value="right-chest">Right Chest</option>
+    
                                     </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
                                         <span></span>

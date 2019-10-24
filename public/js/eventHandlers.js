@@ -127,3 +127,16 @@ $(document).on('keyup mouseup', function(){
 
   !(estimate && ($('#estimate').text('$' + estimate.toFixed(2)))) && ($('#estimate').text('$0.00')) 
 });
+
+$("#submit-data").click(function(){
+ 
+})
+
+
+function recaptchaCallback(){
+  $("#start-design").removeAttr('disabled');
+  $("#start-design").css("background-color", "#A22C38");
+  $("submit-data").removeAttr('disabled');
+}
+$("#start-design").mouseover(function(){ $("#start-design").css("background-color", "#A22C38AA");});
+$("#start-design").mouseleave(function(){ $("#start-design").css("background-color", "#A22C38");});
