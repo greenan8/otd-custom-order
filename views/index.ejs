@@ -306,6 +306,27 @@
                             <hr>
                         </div>
 
+                        <div id="custom-logo-size">
+                            <h4>Logo Size</h4>
+                            <p>Select size of your logo.</p>
+                            <form>
+                                <div uk-form-custom="target: > * > span:first-child">
+                                    <select id="logo-position-options">
+                                        <option value="">Please select...</option>
+                                        <option value="s">small</option>
+                                        <option value="m">medium</option>
+                                        <option value="l">large</option>
+                            
+                                    </select>
+                                    <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                        <span></span>
+                                        <span uk-icon="icon: chevron-down"></span>
+                                    </button>
+                                </div>
+                            </form>
+                            <hr>
+                        </div>
+
                         <div id="custom-logo-print">
                             <h4>Screen Print or Stitching</h4>
                             <div class="uk-column-1-2 uk-column-divider">
@@ -319,12 +340,12 @@
                                 </p>
                             </div>
                             <div class="uk-column-1-2 uk-column-divider">
-                                <h1 class="uk-text-danger uk-text-large">0%</h1>
-                                <h1 class="uk-text-danger uk-text-large">3 Colors</h1>
+                                <h1 class="uk-text-danger uk-text-large">---</h1>
+                                <h1 class="uk-text-danger uk-text-large">---</h1>
                             </div>
                             <div class="uk-column-1-2 uk-column-divider">
-                                <div> <button class="uk-button">Select Screen Print</button> </div>
-                                <div> <button class="uk-button">Select Stitching</button> </div>
+                                <div> <button class="uk-button uk-button-default">Select Screen Print</button> </div>
+                                <div> <button class="uk-button uk-button-default">Select Stitching</button> </div>
                             </div>
 
 
@@ -333,7 +354,7 @@
 
                         <div id="custom-list-upload">
                             <h4>Custom Text</h4>
-                            <p>Upload a csv or excel file. <a href="">Click here</a> to download template.</p>
+                            <p>Upload a csv or excel file. <a href="imgs\OTD Order Print Details.xlsx">Click here</a> to download template.</p>
                             <div class="js-upload" uk-form-custom>
                                 <input type="file" multiple>
                                 <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
@@ -397,7 +418,7 @@
                 <h2 id="estimate">$0.00</h2>
             </div>
             <div id="right-submit">
-                <button class="uk-button uk-button-default" ><p>Submit Order</p></button>
+                <button class="uk-button uk-button-default" id="submit"><p>Submit Order</p></button>
             </div>
         </div>
     </div>
@@ -414,6 +435,8 @@
     <script src="js\uikit-icons.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="js\fetch.js"></script>
+    <script src="js\orderDetails.js"></script>
     <script src="js\eventHandlers.js"></script>
 </body>
 

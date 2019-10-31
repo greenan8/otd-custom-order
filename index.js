@@ -2,6 +2,7 @@
 require('dotenv').config()
 var Airtable = require('airtable');
 const clothingBase = Airtable.base('appmKG59YjZb91BWI');
+const costBase = Airtable.base('app5mCikyR5hw6gLp');
 Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
     apiKey: 'YOUR_API_KEY'
@@ -22,7 +23,7 @@ function getAirtableData(){
             allColors = records;
     }); 
 
-    clothingBase('Print').select({
+    clothingBase('Name Print').select({
         view: 'Grid view'
     }).firstPage(function(err, records) {
         if (err) { console.error(err); return; }
@@ -56,18 +57,6 @@ function getAirtableData(){
                 clothingRecords[record.id]['textPrintOptions'].push(option); 
             });
         });
-
-
-        // allRecords = records;
-        // records.forEach(function(record){
-        //     var currentRecordName = record.get('Name');
-        //     if (!(currentRecordName in clothingRecords)){
-        //         clothingRecords[currentRecordName] = {'default': record.id, 'options': new Array()};
-        //     }
-        //     else{
-        //         clothingRecords[currentRecordName]['options'].push({"id": record.id, "color": record.get('Color Option')});
-        //     }
-        // });
     });  
 
 };
