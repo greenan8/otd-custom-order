@@ -60,7 +60,7 @@ function getAirtableData(){
 
 };
 
-var margins={}, printCost, printExtraCosts={}, stitchCost, stitchExtaCosts={};
+var margins={}, printCost={}, printExtraCosts={}, stitchCost={}, stitchExtraCosts={};
 
 
 function getAirtableCostData(){  
@@ -79,7 +79,7 @@ function getAirtableCostData(){
     }).firstPage(function(err, records) {
         if (err) { console.error(err); return; }
         records.forEach(function(record){
-           margins[record.get("Name")] = record.get("Price");
+           printExtraCosts[record.get("Name")] = record.get("Price");
         }); 
     }); 
 
@@ -88,12 +88,35 @@ function getAirtableCostData(){
     }).firstPage(function(err, records) {
         if (err) { console.error(err); return; }
         records.forEach(function(record){
-           margins[record.get("Name")] = record.get("Price");
+            stitchExtraCosts[record.get("Name")] = record.get("Price");
         }); 
     }); 
 
     //todo: printcosts and stitchcost
+    costBase('Printing Charges').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+        records.forEach(function(record){
+            printCost[record.get("Order Quantity")] = {};
+            for(x=1; x<7; x++){
+            printCost[record.get("Order Quantity")][x] = record.get(x.toString());   
+            }
+        });   
+    }); 
 
+    costBase('Stitching Charges').select({
+        view: 'Grid view'
+    }).firstPage(function(err, records) {
+        if (err) { console.error(err); return; }
+        records.forEach(function(record){
+            stitchCost[record.get("Order Quantity")] = {};
+            for(x=1999; x<30000; x+= 1000){
+            stitchCost[record.get("Order Quantity")][x] = record.get(x.toString());   
+            }
+        });  
+        
+    }); 
 };
 
 //calling both to retrieve data when server loadas
@@ -118,6 +141,7 @@ app.get('/', (req, res) => {
 //admin page is to resync data
 app.get('/admin', (req, res) => { 
     getAirtableData()
+    getAirtableCostData()
     res.send(
         "<h1>All Clothing Records</h1>" +
         JSON.stringify(allRecords) +
@@ -143,6 +167,28 @@ app.get('/clothingRecords', (req, res) => {
 
 app.get('/allPrintOptions', (req, res) => {
     res.send(allPrintOptions);
+});
+
+
+//sending cost records to front end js
+app.get('/margins', (req, res) => {
+    res.send(margins);
+});
+
+app.get('/printCost', (req, res) => {
+    res.send(printCost);
+});
+
+app.get('/printExtraCosts', (req, res) => {
+    res.send(printExtraCosts);
+});
+
+app.get('/stitchCost', (req, res) => {
+    res.send(stitchCost);
+});
+
+app.get('/stitchExtraCosts', (req, res) => {
+    res.send(stitchExtraCosts);
 });
 
 //============================= nodemailer =============================
