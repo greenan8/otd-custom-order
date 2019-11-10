@@ -3,7 +3,7 @@ var orderDetails = {
     "selectedID": "",
     "name": "",
     //detials
-    "orderQuantiy": 0,
+    "quantity": 0,
     "fullName": "",
     "email": "",
     "phone": "",
@@ -15,6 +15,9 @@ var orderDetails = {
     "colorName": "",
     "colorHex": "",
     "logoFile": "",
+    "logoColorNum" : 0,
+    "logoTransparency": 0,
+    "logoSize": 3,
     "logoPosition": "",
     "printType": "",
     "textFile": "",

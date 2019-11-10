@@ -190,6 +190,15 @@ html{
         height: 15vh;
     }
    
+    #custom-upload-logo .uk-card canvas{
+        width: 40%;
+        padding: 0;
+    }
+    #custom-upload-logo #logo-canvas-div{
+        margin-top: 3vh;
+        
+    }
+
 /* ======================= Clothing Card Styling ======================= */
 #width-right{
     text-align: center;

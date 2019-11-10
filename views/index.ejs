@@ -16,7 +16,7 @@
 <body>
 
     <!-- ======================== Opening Welcome Menu ======================== -->
-    <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
+    <!-- <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
         <div class="fade-in-target" uk-slideshow="animation: fade;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" >
@@ -81,14 +81,14 @@
         </div>
         <button class="uk-button uk-button-default fade-in-target" id="start-design" disabled>START YOUR DESIGN</button>
     </div>
-    <div id="instruct-bg"></div>
+    <div id="instruct-bg"></div> -->
     <div id="beta" title="You may find minor bugs and some functionality has not yet been implemented.&#013; If you come across any major issues, email: otdsales@gmail.com">
         <p>Beta</p>
     </div>
     <div class="content" uk-grid>
 
         <!-- ========================Left side main menu ======================== -->
-        <div id="width-left" class="uk-width-2-3@m">
+        <div id="width-left" class="uk-width-2-3@l">
             <div id="main-card" class="uk-card uk-card-default uk-card-body">
 
 
@@ -285,6 +285,7 @@
                                 <input type="file" accept="image/png" id="logo-upload">
                                 <button class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </div>
+                            <div id="logo-canvas-div"><canvas class="uk-card uk-card-default" id="logo-canvas"></canvas></div>
                             <hr>
                         </div>
                         
@@ -311,11 +312,11 @@
                             <p>Select size of your logo.</p>
                             <form>
                                 <div uk-form-custom="target: > * > span:first-child">
-                                    <select id="logo-position-options">
-                                        <option value="">Please select...</option>
-                                        <option value="s">small</option>
-                                        <option value="m">medium</option>
-                                        <option value="l">large</option>
+                                    <select id="logo-size">
+                                        <option value="3">Please select...</option>
+                                        <option value="2">small</option>
+                                        <option value="3">medium</option>
+                                        <option value="4">large</option>
                             
                                     </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
@@ -340,12 +341,12 @@
                                 </p>
                             </div>
                             <div class="uk-column-1-2 uk-column-divider">
-                                <h1 class="uk-text-danger uk-text-large">---</h1>
-                                <h1 class="uk-text-danger uk-text-large">---</h1>
+                                <h1 id="print" class="uk-text-danger uk-text-large">---</h1>
+                                <h1 id="stitch" class="uk-text-danger uk-text-large">---</h1>
                             </div>
                             <div class="uk-column-1-2 uk-column-divider">
-                                <div> <button class="uk-button uk-button-default">Select Screen Print</button> </div>
-                                <div> <button class="uk-button uk-button-default">Select Stitching</button> </div>
+                                <div> <button id="select-print" class="uk-button uk-button-default">Select Screen Print</button> </div>
+                                <div> <button id="select-stitch" class="uk-button uk-button-default">Select Stitching</button> </div>
                             </div>
 
 
@@ -369,6 +370,9 @@
                                 <div uk-form-custom="target: > * > span:first-child">
                                     <select id="text-position-options">
                                         <option value="">Please select...</option>
+                                        <option value="">Left Sleeve</option>
+                                        <option value="">Right Sleeve</option>
+                                        <option value="">Back of Garment</option>
     
                                     </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">
