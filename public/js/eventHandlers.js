@@ -9,7 +9,7 @@ $("#start-design").click(function(){
 $(".clothing-option").on('mousedown', function(){
   var currentID = $(this).attr('value');
   orderDetails.selectedID =  currentID;
-  console.log(currentID);
+  orderDetails.name = $(this).find("h6.name").text();
   var colorList = clothingRecords[currentID].colorOptions;
   
 
@@ -32,11 +32,6 @@ $(".clothing-option").on('mousedown', function(){
   for (p in clothingRecords[currentID]["logoPrintOptions"]){
     $("#logo-position-options").append('<option class="logo-print-option" value="'+ clothingRecords[currentID]["logoPrintOptions"][p] +'">'+ clothingRecords[currentID]["logoPrintOptions"][p] +'</option>');
   }
-    
-
-  //change the text print options under custom
-    //if empty hide text option, delete upload, remove text position that is saved
-    //also print sizes that should be filled out in spreadsheet
 
   //run estimate price again
   updateEstimate();
@@ -85,67 +80,89 @@ $("#text-position-options").change(function(){orderDetails.textPosition = $(this
 $("#logo-position-options").change(function(){orderDetails.logoPosition = $(this).val(); updateEstimate();});
 
 //============================= When logo submitted, upload, add to canvas, and analyze =============================
-var context = document.getElementById('logo-canvas').getContext("2d");
-document.getElementById('logo-canvas').height = document.getElementById('logo-canvas').width;
-var canvasHW = document.getElementById('logo-canvas').width;
-
-$(window).resize(function(){
-  
-})
-
-var img = new Image();
-img.onload = function () {
-    if (img.height > img.width){
-      tempWidth = canvasHW*(img.width / img.height);
-      context.drawImage(img, ((canvasHW-tempWidth)/2), 0, tempWidth, canvasHW);
-    }
-    else{
-      tempHeight = canvasHW*(img.height / img.width);
-      context.drawImage(img, 0, ((canvasHW-tempHeight)/2), canvasHW, tempHeight);
-    }
-    
-    var imgData = context.getImageData(0, 0, canvasHW, canvasHW);
-var colorCount = {};
-var i;
-
-for (i = 0; i < imgData.data.length; i += 4) {
-  color = "";
-  color = color.concat(Math.ceil((imgData.data[i]+1)/10)*10, Math.ceil((imgData.data[i+1]+1)/10)*10, Math.ceil((imgData.data[i+2]+1)/25)*10, Math.ceil((imgData.data[i+3]+1)/50)*10);
-  
-  if(colorCount[color] >= 0){colorCount[color] += 1;}
-  else{colorCount[color] = 0};
-  
-}
-
-for (var x in colorCount){
-  if (colorCount[x] < canvasHW){
-    delete colorCount[x];
+$( "#logo-upload" ).change(function() {
+  if(this.files[0]['type'] != 'image/png'){
+    UIkit.notification({
+      message: 'That was not a png image',
+      status: 'warning',
+      pos: 'top-center',
+      timeout: 5000
+  });
+  }else{
+    orderDetails.logoFile = URL.createObjectURL(this.files[0]);
+    $("#logo-upload-button").css("border","1px solid #A22C38");
+    logoAnalysis();
   }
+});
+
+
+
+function logoAnalysis(){
+  var context = document.getElementById('logo-canvas').getContext("2d");
+  document.getElementById('logo-canvas').height = document.getElementById('logo-canvas').width;
+  var canvasHW = document.getElementById('logo-canvas').width;
+  
+  $(window).resize(function(){
+    
+  })
+  
+  var img = new Image();
+  img.onload = function () {
+      if (img.height > img.width){
+        tempWidth = canvasHW*(img.width / img.height);
+        context.drawImage(img, ((canvasHW-tempWidth)/2), 0, tempWidth, canvasHW);
+      }
+      else{
+        tempHeight = canvasHW*(img.height / img.width);
+        context.drawImage(img, 0, ((canvasHW-tempHeight)/2), canvasHW, tempHeight);
+      }
+      
+      var imgData = context.getImageData(0, 0, canvasHW, canvasHW);
+  var colorCount = {};
+  var i;
+  
+  for (i = 0; i < imgData.data.length; i += 4) {
+    color = "";
+    color = color.concat(Math.ceil((imgData.data[i]+1)/10)*10, Math.ceil((imgData.data[i+1]+1)/10)*10, Math.ceil((imgData.data[i+2]+1)/25)*10, Math.ceil((imgData.data[i+3]+1)/50)*10);
+    
+    if(colorCount[color] >= 0){colorCount[color] += 1;}
+    else{colorCount[color] = 0};
+    
+  }
+  
+  for (var x in colorCount){
+    if (colorCount[x] < canvasHW){
+      delete colorCount[x];
+    }
+  }
+  
+  var count = 0;
+  for (var x in colorCount){
+    count++;
+  }
+  
+  if (count > 6){
+    orderDetails.logoColorNum = 6;
+    $("#print").text("6+ Colors")
+  } else{
+    orderDetails.logoColorNum = count - 1;
+    $("#print").text(orderDetails.logoColorNum.toString().concat(" Colors"));
+  } 
+  
+  (!colorCount['10101010']) || (orderDetails.logoTransparency = (1 - (colorCount['10101010'] / (imgData.data.length/4))).toFixed(3));
+  $("#stitch").text((Math.round(orderDetails.logoTransparency*100)).toString().concat("%"));
+  
+  }
+    
+  img.src = orderDetails.logoFile;
 }
 
-var count = 0;
-for (var x in colorCount){
-  count++;
-}
-
-if (count > 6){
-  orderDetails.logoColorNum = 6;
-  $("#print").text("6+ Colors")
-} else{
-  orderDetails.logoColorNum = count - 1;
-  $("#print").text(orderDetails.logoColorNum.toString().concat(" Colors"));
-} 
-
-(!colorCount['10101010']) || (orderDetails.logoTransparency = (1 - (colorCount['10101010'] / (imgData.data.length/4))).toFixed(3));
-$("#stitch").text((Math.round(orderDetails.logoTransparency*100)).toString().concat("%"));
-
-}
-
-
-img.src = "imgs/test-logo.png";
 
 //============================= When excel submitted, upload =============================
-
+$( "#text-upload" ).change(function() {
+    orderDetails.textFile = URL.createObjectURL(this.files[0]);
+    $("#text-upload-button").css("border","1px solid #A22C38");
+});
 
 
 
