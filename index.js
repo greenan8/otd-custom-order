@@ -9,6 +9,7 @@ Airtable.configure({
 });
 
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
+
 var allRecords;
 var allColors;
 var logoPrintOptions;
