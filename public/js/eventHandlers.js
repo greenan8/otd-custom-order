@@ -101,11 +101,7 @@ function logoAnalysis(){
   var context = document.getElementById('logo-canvas').getContext("2d");
   document.getElementById('logo-canvas').height = document.getElementById('logo-canvas').width;
   var canvasHW = document.getElementById('logo-canvas').width;
-  
-  $(window).resize(function(){
-    
-  })
-  
+
   var img = new Image();
   img.onload = function () {
       if (img.height > img.width){
@@ -155,6 +151,8 @@ function logoAnalysis(){
   }
     
   img.src = orderDetails.logoFile;
+
+  //todo: todataurl on canvas
 }
 
 
@@ -235,7 +233,6 @@ $("#start-design").mouseleave(function(){ $("#start-design").css("background-col
 $("#submit").click(function(){
   //check if all needed data is filled
   console.log(orderDetails);
-    //is excel and text position needed?
-  //if data is missing let them them know which data
-  //if all data is there then submit to server to nodemailer, put up submit notice then redirect to oilthighdesign
+  $.post('/email', orderDetails); 
+  
 });

@@ -5,7 +5,7 @@ const clothingBase = Airtable.base('appmKG59YjZb91BWI');
 const costBase = Airtable.base('app5mCikyR5hw6gLp');
 Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
-    apiKey: 'YOUR_API_KEY'
+    apiKey: process.env.AIRTABLE_API_KEY,
 });
 
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
@@ -197,9 +197,91 @@ app.get('/stitchExtraCosts', (req, res) => {
 });
 
 //============================= nodemailer =============================
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const nodemailer= require('nodemailer');
+const nodemailerMailgun = require('nodemailer-mailgun-transport');
+
+let transporter = nodemailer.createTransport(nodemailerMailgun({auth: {
+    api_key: process.env.MAILGUN_API_KEY,
+    domain: process.env.MAILGUN_DOMAIN,
+}}));
 
 
+app.post('/email', (req, res) => {
+        const emailBody =`
+            <h2>OTD App Order</h2>
 
+            <hr/>
+
+            <h4>Contact Details</h4>
+            <ul>
+            <li>Name: ${req.body.fullName}</li>
+            <li>Email: ${req.body.email}</li>
+            <li>Phone: ${req.body.phone}</li>
+            <li>Club: ${req.body.org}</li>
+            <li>Ratified Under: ${req.body.ratified}</li>
+            </ul>
+
+            <hr/>
+
+            <h4>Order Details</h4>
+            <P>General</P>
+            <ul>
+            <li>Quantity: ${req.body.quantity}</li>
+            <li>Clothing: ${req.body.name}</li>
+            <li>Notes: ${req.body.notes}</li>
+            </ul>
+            <p>Logo</p>
+            <li># of Colors: ${req.body.logoColorNum}</li>
+            <li>Transparency %: ${req.body.logoTransparency}</li>
+            <li>Size: ${req.body.logoSize}</li>
+            <li>Position: ${req.body.logoPosition}</li>
+            <ul/>
+            <p>Text</p>
+            <ul>
+            <li>Position: ${req.body.testPosition}</li>
+            <ul/>
+
+            <hr/>
+
+            <h4>Costing</h4>
+            <P>general</P>
+            <ul>
+            <li>Estimated Total: ${0}</li>
+            <li>Unit Clothing Cost: ${0}</li>
+            <li>Unit Print Cost: ${0}</li>
+            <li>Stitch Count: ${0}</li>
+            <li>More to add...</li> 
+            <ul/>
+            `;
+        
+            const mailOptions = {
+                from: '"OTD Custom Order App" <me@samples.mailgun.org>', // sender address
+                to: 'otdstaff@gmail.com', // list of receivers
+                subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
+                text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
+                html: emailBody, // html body
+                // attachments: [
+                   
+                //     {   
+                //         filename: 'logo.png',
+                //         content: new Buffer(req.body.logoBuffer, 'base64'),
+                //         contentType: 'image/png'
+                //     },
+                // ]
+            }
+       
+            transporter.sendMail(mailOptions, function(err, data){
+                if (err){
+                    console.log("Error: ", err);
+                }else{
+                    console.log("submit");
+                }
+            });
+});
 
 app.listen(3000); 
 

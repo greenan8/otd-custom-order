@@ -15,6 +15,7 @@ var orderDetails = {
     "colorName": "",
     "colorHex": "",
     "logoFile": "",
+    "logoData": "",
     "logoColorNum" : 0,
     "logoTransparency": 0,
     "logoSize": 3,
