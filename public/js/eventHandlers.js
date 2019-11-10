@@ -90,7 +90,7 @@ $( "#logo-upload" ).change(function() {
   });
   }else{
     orderDetails.logoFile = URL.createObjectURL(this.files[0]);
-    $("#logo-upload-button").css("border","1px solid #A22C38");
+    $("#logo-upload-button").text(this.files[0]["name"]);
     logoAnalysis();
   }
 });
@@ -161,7 +161,7 @@ function logoAnalysis(){
 //============================= When excel submitted, upload =============================
 $( "#text-upload" ).change(function() {
     orderDetails.textFile = URL.createObjectURL(this.files[0]);
-    $("#text-upload-button").css("border","1px solid #A22C38");
+    $("#text-upload-button").text(this.files[0]["name"]);
 });
 
 
