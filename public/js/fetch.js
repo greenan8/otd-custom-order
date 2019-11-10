@@ -23,13 +23,6 @@ fetch("/clothingRecords")
     })
 })
 
-fetch("/allPrintOptions")
-.then(response => {
-    response.json().then(json => {
-        allPrintOptions = json;   
-    })
-})
-
 fetch("/margins")
 .then(response => {
     response.json().then(json => {

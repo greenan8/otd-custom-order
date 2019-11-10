@@ -273,7 +273,7 @@
                             <span class="dot"></span>
                             <span class="dot"></span>
                             <% allColors.forEach(function(record){ %>
-                            <span class="dot" title= <%= record.get("Name");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
+                            <span class="dot" title= <%= record.get("Name");%> value= <%= record.get("Hex");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
                             <% }); %>
 
                             <hr>
@@ -370,9 +370,9 @@
                                 <div uk-form-custom="target: > * > span:first-child">
                                     <select id="text-position-options">
                                         <option value="">Please select...</option>
-                                        <option value="">Left Sleeve</option>
-                                        <option value="">Right Sleeve</option>
-                                        <option value="">Back of Garment</option>
+                                        <option value="Left Sleeve">Left Sleeve</option>
+                                        <option value="Right Sleeve">Right Sleeve</option>
+                                        <option value="Back of Garment">Back of Garment</option>
     
                                     </select>
                                     <button class="uk-button uk-button-default" type="button" tabindex="-1">

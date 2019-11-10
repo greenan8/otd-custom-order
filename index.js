@@ -11,7 +11,7 @@ Airtable.configure({
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
 var allRecords;
 var allColors;
-var allPrintOptions;
+var logoPrintOptions;
 var clothingRecords = {};
 
 function getAirtableData(){  
@@ -27,7 +27,7 @@ function getAirtableData(){
         view: 'Grid view'
     }).firstPage(function(err, records) {
         if (err) { console.error(err); return; }
-            allPrintOptions = records;
+            logoPrintOptions = records;
     }); 
 
     clothingBase('Clothing').select({
@@ -48,7 +48,12 @@ function getAirtableData(){
 
             logoPrintOptions = record.get('Logo Print Options');
             logoPrintOptions && logoPrintOptions.forEach(function(option){
-                clothingRecords[record.id]['logoPrintOptions'].push(option); 
+                clothingBase('Logo Print').find(option, function(err, logoPrintRecord) {
+                    if (err) { console.error(err); return; }
+                    clothingRecords[record.id]['logoPrintOptions'].push(logoPrintRecord.get('Name')); 
+                });
+             
+                
             });
 
             textPrintOptions = record.get('Text Print Options');
@@ -135,7 +140,7 @@ app.use(express.static(__dirname + '/public'));
 //============================= All paths =============================
 //Load webapp
 app.get('/', (req, res) => {
-    res.render('index', {allRecords, clothingRecords, allColors, allPrintOptions});
+    res.render('index', {allRecords, clothingRecords, allColors, logoPrintOptions});
 });
 
 //admin page is to resync data
@@ -165,8 +170,8 @@ app.get('/clothingRecords', (req, res) => {
     res.send(clothingRecords);
 });
 
-app.get('/allPrintOptions', (req, res) => {
-    res.send(allPrintOptions);
+app.get('/logoPrintOptions', (req, res) => {
+    res.send(logoPrintOptions);
 });
 
 

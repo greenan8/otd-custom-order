@@ -11,24 +11,35 @@ $(".clothing-option").on('mousedown', function(){
   orderDetails.selectedID =  currentID;
   console.log(currentID);
   var colorList = clothingRecords[currentID].colorOptions;
-  var logoPrintList = clothingRecords[currentID].logoPrintOptions;
-  var textPrintList = clothingRecords[currentID].textPrintOptions;
+  
 
   //change the color options under custom
   $("span.dot").attr("hidden",true);
+  $(".dot").removeClass('selected');
+  //remove color choice
+  orderDetails.colorHex = "";
+  orderDetails.colorID = "";
+  orderDetails.colorName = "";
 
   colorList.forEach(e => {
     $("span.dot#" + e).attr("hidden",false);   
   });
-    //if selected color option is not in changed product, remove color option that is saved
     
   //change the logo options under custom
-    //if different type remove logo position that is saved
+  $( ".logo-print-option" ).remove();
+  $("#logo-position-options").val("");
+  orderDetails.logoPosition = "";
+  for (p in clothingRecords[currentID]["logoPrintOptions"]){
+    $("#logo-position-options").append('<option class="logo-print-option" value="'+ clothingRecords[currentID]["logoPrintOptions"][p] +'">'+ clothingRecords[currentID]["logoPrintOptions"][p] +'</option>');
+  }
+    
 
   //change the text print options under custom
     //if empty hide text option, delete upload, remove text position that is saved
     //also print sizes that should be filled out in spreadsheet
 
+  //run estimate price again
+  updateEstimate();
 });
 
 
@@ -38,7 +49,7 @@ $("#full-name").change(function(){orderDetails.fullName = $(this).val();});
 $("#email").change(function(){orderDetails.email = $(this).val();});
 $("#phone").change(function(){orderDetails.phone = $(this).val();});
 $("#org").change(function(){orderDetails.org = $(this).val();});
-$("#ratified").change(function(){orderDetails.ratified = $(this).val();});
+$("#ratified").change(function(){orderDetails.ratified = $(this).val(); updateEstimate();});
 $("#notes").change(function(){orderDetails.notes = $(this).val();});
 
 
@@ -50,6 +61,7 @@ $(".dot").click(function(){
     $(this).addClass('selected');
     orderDetails.colorID = $(this).attr('id');
     orderDetails.colorName = $(this).attr('title')
+    orderDetails.colorHex = $(this).attr('value');
     //TODO: change image on live preview
 });
 
@@ -69,7 +81,8 @@ $("#select-stitch").click(function(){
   updateEstimate();
 });
 
-
+$("#text-position-options").change(function(){orderDetails.textPosition = $(this).val();});
+$("#logo-position-options").change(function(){orderDetails.logoPosition = $(this).val(); updateEstimate();});
 
 //============================= When logo submitted, upload, add to canvas, and analyze =============================
 var context = document.getElementById('logo-canvas').getContext("2d");
@@ -123,7 +136,7 @@ if (count > 6){
   $("#print").text(orderDetails.logoColorNum.toString().concat(" Colors"));
 } 
 
-(!colorCount['10101010']) || (orderDetails.logoTransparency = 1 - (colorCount['10101010'] / (imgData.data.length/4)));
+(!colorCount['10101010']) || (orderDetails.logoTransparency = (1 - (colorCount['10101010'] / (imgData.data.length/4))).toFixed(3));
 $("#stitch").text((Math.round(orderDetails.logoTransparency*100)).toString().concat("%"));
 
 }
@@ -151,41 +164,44 @@ function updateEstimate(){
   }
   
   //calc stitch cost or print cost of logo and apply margin
-  
-
   if(orderDetails.printType == "Print"){
+    qPrevious = Object.keys(printCost)[0];
     for(q in printCost){
       if (parseInt(q) >= orderDetails.quantity){
-        printPrice = printCost[q][(orderDetails.logoColorNum).toString()];
+        printPrice = printCost[qPrevious][(orderDetails.logoColorNum).toString()];
         break;
       }
+      qPrevious = q;
     }
   } else if(orderDetails.printType == "Stitch"){
     stitchCount = orderDetails.logoSize*2*orderDetails.logoTransparency*2200;
+    
+    qPrevious = Object.keys(stitchCost)[0]; 
+    console.log(qPrevious);
+    sPrevious = Object.keys(stitchCost[qPrevious])[0]; 
     for (q in stitchCost){
       if (parseInt(q) >= orderDetails.quantity){
-        for(s in stitchCost[q]){
+        for(s in stitchCost[qPrevious]){
           if (parseInt(s) >= stitchCount){
-            printPrice = stitchCost[q][s];
-            console.log(stitchCost[q][s]);
-            break;
+            printPrice = stitchCost[qPrevious][sPrevious];
           }
+          sPrevious = s;
         }
         break;
       }
+      qPrevious = q;
     }
     
   } else{
     printPrice = 0;
   }
 
+  //estimate price and display
   estimate = orderDetails.quantity*(basePrice + printPrice*(1+margin));
   !(estimate && ($('#estimate').text('$' + estimate.toFixed(2)))) && ($('#estimate').text('$0.00'));
 };
 
-$("#submit-data").click(function(){
- 
-})
+
 
 
 //============================= recaptcha to block entry until checked =============================
