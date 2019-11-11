@@ -210,6 +210,8 @@ let transporter = nodemailer.createTransport(nodemailerMailgun({auth: {
     domain: process.env.MAILGUN_DOMAIN,
 }}));
 
+logoName = "";
+textName = "";
 
 app.post('/email', (req, res) => {
         const emailBody =`
@@ -271,14 +273,17 @@ app.post('/email', (req, res) => {
                 subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
                 text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
                 html: emailBody, // html body
-                // attachments: [
+                attachments: [
                    
-                //     {   
-                //         filename: 'logo.png',
-                //         content: new Buffer(req.body.logoBuffer, 'base64'),
-                //         contentType: 'image/png'
-                //     },
-                // ]
+                    {   
+                        filename: 'logo.png',
+                        path: "public/temp/uploads/".concat(logoName)
+                    },
+                    {   
+                        filename: 'text.xlsx',
+                        path: "public/temp/uploads/".concat(textName)
+                    }
+                ]
             }
        
             transporter.sendMail(mailOptions, function(err, data){
@@ -296,9 +301,16 @@ const multer = require('multer');
 const upload = multer({dest: 'public/temp/uploads'});
 
 app.post("/logoUpload", upload.single('logo'), (req,res) =>{
-    console.log(req.file);
+    console.log(req.file.filename);
+    logoName = req.file.filename;
+    console.log("public/temp/uploads".concat(logoName));
     res.sendStatus(204);
 })
 
+app.post("/textUpload", upload.single('text'), (req,res) =>{
+    console.log(req.file.filename);
+    textName = req.file.filename;
+    res.sendStatus(204);
+})
 app.listen(3000); 
 

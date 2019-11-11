@@ -272,22 +272,8 @@ $("#start-design").mouseleave(function(){ $("#start-design").css("background-col
 $("#submit").click(function(){
   //check if all needed data is filled
   console.log(orderDetails);
-  // $.post('/email', orderDetails); 
-    var logoFormData = new FormData($('#logo-upload-form')[0]);
-    console.log(logoFormData);
-   
-    jQuery.ajax({
-      url: '/logoUpload',
-      enctype: 'multipart/form-data',
-      data: logoFormData,
-      cache: false,
-      contentType: false,
-      processData: false,
-      method: 'POST',
+  $.post('/email', orderDetails); 
 
-      success: function(data){
-          alert(data);
-      }
-  });
+   
   
 });

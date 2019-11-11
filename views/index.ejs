@@ -356,7 +356,7 @@
                             <h4>Custom Text</h4>
                             <p>Upload a csv or excel file. <a href="imgs\OTD Order Print Details.xlsx">Click here</a> to download template.</p>
                             <form id="text-upload-form"class="js-upload" action="/textUpload" method="post" enctype="multipart/form-data" uk-form-custom>
-                                <input type="file" id="text-upload" onchange="this.form.submit()">
+                                <input type="file" name="text" id="text-upload" onchange="this.form.submit()">
                                 <button id="text-upload-button" class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </form>
                             <hr id="custom-list-hr">
