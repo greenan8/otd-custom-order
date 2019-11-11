@@ -218,45 +218,51 @@ app.post('/email', (req, res) => {
             <hr/>
 
             <h4>Contact Details</h4>
+            
             <ul>
-            <li>Name: ${req.body.fullName}</li>
-            <li>Email: ${req.body.email}</li>
-            <li>Phone: ${req.body.phone}</li>
-            <li>Club: ${req.body.org}</li>
-            <li>Ratified Under: ${req.body.ratified}</li>
+                <li>Name: ${req.body.fullName}</li>
+                <li>Email: ${req.body.email}</li>
+                <li>Phone: ${req.body.phone}</li>
+                <li>Club: ${req.body.org}</li>
+                <li>Ratified Under: ${req.body.ratified}</li>
             </ul>
 
             <hr/>
 
             <h4>Order Details</h4>
+            
             <P>General</P>
             <ul>
-            <li>Quantity: ${req.body.quantity}</li>
-            <li>Clothing: ${req.body.name}</li>
-            <li>Notes: ${req.body.notes}</li>
+                <li>Quantity: ${req.body.quantity}</li>
+                <li>Clothing: ${req.body.name}</li>
+                <li>Notes: ${req.body.notes}</li>
             </ul>
+           
             <p>Logo</p>
-            <li># of Colors: ${req.body.logoColorNum}</li>
-            <li>Transparency %: ${req.body.logoTransparency}</li>
-            <li>Size: ${req.body.logoSize}</li>
-            <li>Position: ${req.body.logoPosition}</li>
-            <ul/>
+            <ul>
+                <li># of Colors: ${req.body.logoColorNum}</li>
+                <li>Transparency %: ${req.body.logoTransparency}</li>
+                <li>Size: ${req.body.logoSize}</li>
+                <li>Position: ${req.body.logoPosition}</li>
+                <li>Stitch Count: ${req.body.logoStitchCount}</li>
+            </ul>
+            
             <p>Text</p>
             <ul>
-            <li>Position: ${req.body.testPosition}</li>
-            <ul/>
+                <li>Position: ${req.body.textPosition}</li>
+            </ul>
 
             <hr/>
 
             <h4>Costing</h4>
-            <P>general</P>
             <ul>
-            <li>Estimated Total: ${0}</li>
-            <li>Unit Clothing Cost: ${0}</li>
-            <li>Unit Print Cost: ${0}</li>
-            <li>Stitch Count: ${0}</li>
-            <li>More to add...</li> 
-            <ul/>
+                <li>Estimated Total: ${req.body.totalCost}</li>
+                <li>Unit Clothing Cost: ${req.body.basePrice}</li>
+                <li>Unit Logo Cost: ${req.body.printPrice}</li>
+                <li>Unit Text Cost: ${req.body.textPrice}</li>
+                <li>Setup Cost: ${req.body.setupCost}</li>
+                <li>Setup Cost: ${req.body.margin}</li>
+            </ul>
             `;
         
             const mailOptions = {
@@ -283,6 +289,16 @@ app.post('/email', (req, res) => {
                 }
             });
 });
+
+
+//============================= attachments =============================
+const multer = require('multer');
+const upload = multer({dest: 'public/temp/uploads'});
+
+app.post("/logoUpload", upload.single('logo'), (req,res) =>{
+    console.log(req.file);
+    res.sendStatus(204);
+})
 
 app.listen(3000); 
 

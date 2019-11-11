@@ -18,10 +18,17 @@ var orderDetails = {
     "logoData": "",
     "logoColorNum" : 0,
     "logoTransparency": 0,
+    "logoStitchCount": 0,
     "logoSize": 3,
     "logoPosition": "",
     "printType": "",
     "textFile": "",
-    "textPosition": ""
+    "textPosition": "",
+    "basePrice": 0,
+    "printPrice": 0,
+    "textPrice": 0,
+    "setupCost": 0,
+    "margin": 0,
+    "totalCost": 0
   }
   

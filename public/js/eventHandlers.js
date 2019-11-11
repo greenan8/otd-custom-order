@@ -76,7 +76,7 @@ $("#select-stitch").click(function(){
   updateEstimate();
 });
 
-$("#text-position-options").change(function(){orderDetails.textPosition = $(this).val();});
+$("#text-position-options").change(function(){orderDetails.textPosition = $(this).val(); updateEstimate();});
 $("#logo-position-options").change(function(){orderDetails.logoPosition = $(this).val(); updateEstimate();});
 
 //============================= When logo submitted, upload, add to canvas, and analyze =============================
@@ -178,8 +178,21 @@ function updateEstimate(){
     margin = margins["Other Margin"];
   }
   
-  //calc stitch cost or print cost of logo and apply margin
+  //calc stitch cost or print cost of logo and setup cost
   if(orderDetails.printType == "Print"){
+
+
+    setupCost = printExtraCosts["Setup Charge"];
+
+    textPrice = 0;
+    if ($("#text-position-options").val() == "Back"){
+      textPrice = printExtraCosts["Back Name"];
+    }
+    else if ($("#text-position-options").val() == "Left" || $("#text-position-options").val() == "Right"){
+      textPrice = printExtraCosts["Sleeve Print"];
+    }
+
+
     qPrevious = Object.keys(printCost)[0];
     for(q in printCost){
       if (parseInt(q) >= orderDetails.quantity){
@@ -187,10 +200,24 @@ function updateEstimate(){
         break;
       }
       qPrevious = q;
+
+
     }
-  } else if(orderDetails.printType == "Stitch"){
-    stitchCount = orderDetails.logoSize*2*orderDetails.logoTransparency*2200;
+  } 
+  else if(orderDetails.printType == "Stitch"){
     
+    stitchCount = orderDetails.logoSize*2*orderDetails.logoTransparency*2200;
+    orderDetails.logoStitchCount = stitchCount;
+
+
+    setupCost = stitchExtraCosts["Digitizing Cost"]*stitchCount/1000;
+
+    textPrice = 0;
+    if ($("#text-position-options").val() == "Back" || $("#text-position-options").val() == "Left" || $("#text-position-options").val() == "Right"){
+      // assume two line text for now
+      textPrice = stitchExtraCosts["Two Line Text"];
+    }
+
     qPrevious = Object.keys(stitchCost)[0]; 
     console.log(qPrevious);
     sPrevious = Object.keys(stitchCost[qPrevious])[0]; 
@@ -209,10 +236,22 @@ function updateEstimate(){
     
   } else{
     printPrice = 0;
+    setupCost = 0;
+    textPrice = 0;
   }
 
+  //calc additional costs
+
+  //calc
   //estimate price and display
-  estimate = orderDetails.quantity*(basePrice + printPrice*(1+margin));
+  orderDetails.basePrice = basePrice.toFixed(2);
+  orderDetails.printPrice = printPrice.toFixed(2);
+  orderDetails.margin = margin;
+  orderDetails.setupCost = (setupCost*(1+margin)).toFixed(2);
+  orderDetails.textPrice = (textPrice*(1+margin)).toFixed(2);
+
+  estimate = orderDetails.quantity*(basePrice + (textPrice + printPrice)*(1+margin))+setupCost*(1+margin);
+  orderDetails.totalCost = estimate.toFixed(2);;
   !(estimate && ($('#estimate').text('$' + estimate.toFixed(2)))) && ($('#estimate').text('$0.00'));
 };
 
@@ -233,6 +272,22 @@ $("#start-design").mouseleave(function(){ $("#start-design").css("background-col
 $("#submit").click(function(){
   //check if all needed data is filled
   console.log(orderDetails);
-  $.post('/email', orderDetails); 
+  // $.post('/email', orderDetails); 
+    var logoFormData = new FormData($('#logo-upload-form')[0]);
+    console.log(logoFormData);
+   
+    jQuery.ajax({
+      url: '/logoUpload',
+      enctype: 'multipart/form-data',
+      data: logoFormData,
+      cache: false,
+      contentType: false,
+      processData: false,
+      method: 'POST',
+
+      success: function(data){
+          alert(data);
+      }
+  });
   
 });
