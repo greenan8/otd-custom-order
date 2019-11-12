@@ -57,3 +57,27 @@ fetch("/stitchExtraCosts")
         stitchExtraCosts = json;   
     })
 })
+
+function fetchLogoMulterFile(){
+    setTimeout(function(){
+        fetch("/logoUpload")
+        .then(response => {
+        response.json().then(json => {
+            orderDetails.logoMulterFile = json["logoName"];   
+            if (json["logoName"] != ""){orderDetails.logoSubmitted = true;}
+        })
+    }) 
+    }, 1000);   
+}
+
+function fetchTextMulterFile(){
+    setTimeout(function(){
+        fetch("/textUpload")
+        .then(response => {
+        response.json().then(json => {
+            orderDetails.textMulterFile = json["textName"];   
+            if (json["textName"] != ""){orderDetails.textSubmitted = true;}
+        })
+    }) 
+    }, 1000);   
+}

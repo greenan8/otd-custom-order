@@ -255,9 +255,6 @@ function updateEstimate(){
   !(estimate && ($('#estimate').text('$' + estimate.toFixed(2)))) && ($('#estimate').text('$0.00'));
 };
 
-
-
-
 //============================= recaptcha to block entry until checked =============================
 function recaptchaCallback(){
   $("#start-design").removeAttr('disabled');

@@ -301,16 +301,22 @@ const multer = require('multer');
 const upload = multer({dest: 'public/temp/uploads'});
 
 app.post("/logoUpload", upload.single('logo'), (req,res) =>{
-    console.log(req.file.filename);
     logoName = req.file.filename;
-    console.log("public/temp/uploads".concat(logoName));
     res.sendStatus(204);
+})
+app.get("/logoUpload", (req,res) =>{
+    res.send({"logoName": logoName});
 })
 
 app.post("/textUpload", upload.single('text'), (req,res) =>{
-    console.log(req.file.filename);
     textName = req.file.filename;
     res.sendStatus(204);
 })
+app.get("/textUpload", (req,res) =>{
+    res.send({"textName": textName});
+})
+
+
+
 app.listen(3000); 
 
