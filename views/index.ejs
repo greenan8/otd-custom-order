@@ -16,7 +16,7 @@
 <body>
 
     <!-- ======================== Opening Welcome Menu ======================== -->
-    <!-- <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
+    <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
         <div class="fade-in-target" uk-slideshow="animation: fade;">
 
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" >
@@ -81,7 +81,7 @@
         </div>
         <button class="uk-button uk-button-default fade-in-target" id="start-design" disabled>START YOUR DESIGN</button>
     </div>
-    <div id="instruct-bg"></div> -->
+    <div id="instruct-bg"></div>
     <div id="beta" title="You may find minor bugs and some functionality has not yet been implemented.&#013; If you come across any major issues, email: otdsales@gmail.com">
         <p>Beta</p>
     </div>
@@ -122,7 +122,7 @@
                                     <% if(record.get('Product Category')=="Tees and Tanks"){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img class="clothing-option" value=<%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
                                             <h6 class="name"> <%= record.get('Display Name') %> </h6>
                                             <p class="colors"><%= record.get('Count') %>+ Colors... </p>
                                             <p class="price">Starts at $<%= record.get('Starting Price') %>.00</p>

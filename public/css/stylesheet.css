@@ -1,435 +1,428 @@
-html{
-    font-family: 'Open Sans', sans-serif;
-    background-color: rgb(248, 248, 248);
-    overflow: hidden;
+html {
+  font-family: 'Open Sans', sans-serif;
+  background-color: rgb(248, 248, 248);
+  overflow: hidden;
 }
 
 /* =======================Main Card Styling ======================= */
-#main-card{
-    height: 80vh;
-    margin: 5vh 0;
-    width: 90%;
-    padding: 0;
-    border-radius: 15px 15px 0 0;
-    display: inline-block;
-    overflow: hidden;
+#main-card {
+  height: 80vh;
+  margin: 5vh 0;
+  width: 90%;
+  padding: 0;
+  border-radius: 15px 15px 0 0;
+  display: inline-block;
+  overflow: hidden;
 }
-#width-left{
-    text-align: center;
+#width-left {
+  text-align: center;
 }
 
-    /* Top level Menu Styling */
-    #top-level-menu{
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        font-size: 0;
-    }
-    #top-level-left{
-        border-radius: 15px 0 0 0;
-    }
-    #top-level-right{
-        border-radius: 0 15px 0 0;
-    }
-    #top-level-menu button{
-        width: 33.333333333333333333333%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        /* font-size: 1vw!important; */
-        font-size: 11px;
-        font-weight: 600; 
-        color: #818181;
-        background-color: #ebebeb!important;
-    }
-    #top-level-menu button.uk-active{
-        background-color: #A22C38!important;
-        color: white!important;
-        border: none;
-    } 
-    #top-level-menu button:hover{
-        background-color:  #A22C38!important;
-        color: white;
-        border: none;
-    }
+/* Top level Menu Styling */
+#top-level-menu {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-size: 0;
+}
+#top-level-left {
+  border-radius: 15px 0 0 0;
+}
+#top-level-right {
+  border-radius: 0 15px 0 0;
+}
+#top-level-menu button {
+  width: 33.333333333333333333333%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  /* font-size: 1vw!important; */
+  font-size: 11px;
+  font-weight: 600;
+  color: #818181;
+  background-color: #ebebeb !important;
+}
+#top-level-menu button.uk-active {
+  background-color: #a22c38 !important;
+  color: white !important;
+  border: none;
+}
+#top-level-menu button:hover {
+  background-color: #a22c38 !important;
+  color: white;
+  border: none;
+}
 
-    /* Second level menus */
-    .second-level-menu{
-        margin-top: -15px;  
-    }
-    .second-level-menu li a{
-        font-size: 10px;
-        padding: 10px;
-        height: 3vh!important;
-    } 
-    .second-level-menu li.uk-active a{
-        border-color: #A22C38!important;
-    }
+/* Second level menus */
+.second-level-menu {
+  margin-top: -15px;
+}
+.second-level-menu li a {
+  font-size: 10px;
+  padding: 10px;
+  height: 3vh !important;
+}
+.second-level-menu li.uk-active a {
+  border-color: #a22c38 !important;
+}
 
-    /* Choose Apparel Styling */
-    .clothing-items{
-        overflow: scroll;
-        height: 80vh;
-        padding: 0 28px;
-    }
-    .clothing-items .uk-text-center{
-       margin-top: 20px;
-    }
-    .clothing-items .uk-card{
-        padding: 0px;
-        height: 45vh;
-        min-height: 150px;
-        margin: 0 -3px;
-        border-radius: 10px;
-        overflow: hidden;
-    }
-    .clothing-items img{
-        height: 65%;
-        width: 100%;
-        border-radius: 10px 10px 0 0;
-        object-fit: cover;
-        margin-bottom: 0.5vh;
-    }
-    .clothing-items .name{
-        margin-top: 6px;
-        margin-bottom: -0.6vh;
-        padding: 0;
-        font-size: calc(10px + 0.4vw);
-        font-weight: 700;
-        height: calc((10px + 0.4vw)*2);
-    }
-    .clothing-items .colors{
-        margin-top: 3vh;
-        margin-bottom: 0;
-        padding: 0;
-        font-size: calc(9px + 0.5vw);
-    }
-    .clothing-items .price{
-        margin-top: 0;
-        padding: 0;
-        font-size: calc(9px + 0.5vw);
-    }
-    .clothing-menu-bottom-space{
-        height: 8vh;
-    }
-    .clothing-items .uk-card:active{
-        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    }
-    
-    
-    /* ========= Order Details Styling ============ */
+/* Choose Apparel Styling */
+.clothing-items {
+  overflow: scroll;
+  height: 80vh;
+  padding: 0 28px;
+}
+.clothing-items .uk-text-center {
+  margin-top: 20px;
+}
+.clothing-items .uk-card {
+  padding: 0px;
+  height: 45vh;
+  min-height: 150px;
+  margin: 0 -3px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.clothing-items img {
+  height: 65%;
+  width: 100%;
+  border-radius: 10px 10px 0 0;
+  object-fit: cover;
+  margin-bottom: 0.5vh;
+}
+.clothing-items .name {
+  margin-top: 6px;
+  margin-bottom: -0.6vh;
+  padding: 0;
+  font-size: calc(10px + 0.4vw);
+  font-weight: 700;
+  height: calc((10px + 0.4vw) * 2);
+}
+.clothing-items .colors {
+  margin-top: 3vh;
+  margin-bottom: 0;
+  padding: 0;
+  font-size: calc(9px + 0.5vw);
+}
+.clothing-items .price {
+  margin-top: 0;
+  padding: 0;
+  font-size: calc(9px + 0.5vw);
+}
+.clothing-menu-bottom-space {
+  height: 8vh;
+}
+.clothing-items .uk-card:active {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
 
-    #order-details{
-        overflow: scroll;
-        height: 82vh;
-        margin-top: -20px;
-        padding: 2vw;
-        
-    }
-    #order-details .scroll-bottom-space{
-       height: 15vh;
-    }
+/* ========= Order Details Styling ============ */
 
-    #contact-details form, #size-details form{
-        padding-left: 5vw;
-        padding-right: 5vw;
-        margin-top: 0!important;
-        margin-bottom: 5vh;
-    }
-    
-    form label, form div{
-        text-align: left;
-    }
+#order-details {
+  overflow: scroll;
+  height: 82vh;
+  margin-top: -20px;
+  padding: 2vw;
+}
+#order-details .scroll-bottom-space {
+  height: 15vh;
+}
 
+#contact-details form,
+#size-details form {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  margin-top: 0 !important;
+  margin-bottom: 5vh;
+}
 
-    input.uk-input:focus, textarea:focus, select:focus, option{
-        border-color: #A22C38!important;
-    }
+form label,
+form div {
+  text-align: left;
+}
 
-    #order-details hr{
-        margin-left: -2vw;
-        margin-right: -2vw;
-    }
+input.uk-input:focus,
+textarea:focus,
+select:focus,
+option {
+  border-color: #a22c38 !important;
+}
 
-    /* ========= Cusomization Styling ============ */
-    #customization-items{
-        overflow: scroll;
-        height: 85vh;
-        margin-top: -20px;
-    }
+#order-details hr {
+  margin-left: -2vw;
+  margin-right: -2vw;
+}
 
-    .dot {
-        height: 25px;
-        width: 25px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        opacity: 0.3;
-    }
-    .dot:hover{
-        opacity: 0.6;
-    }
-    
-    .dot.selected{
-        opacity: 0.75;
-    }
-    
-    #custom-color{
-        padding-top: 2vw;
-    }
+/* ========= Cusomization Styling ============ */
+#customization-items {
+  overflow: scroll;
+  height: 85vh;
+  margin-top: -20px;
+}
 
-    #quantity{
-        width: 30%;
-    }
-    
-    hr{
-        margin: 6vh 0;
-    }
-   
-    .scroll-bottom-space{
-        height: 15vh;
-    }
-   
-    #custom-upload-logo .uk-card canvas{
-        width: 40%;
-        padding: 0;
-    }
-    #custom-upload-logo #logo-canvas-div{
-        margin-top: 3vh;
-        
-    }
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.3;
+}
+.dot:hover {
+  opacity: 0.6;
+}
+
+.dot.selected {
+  opacity: 0.75;
+}
+
+#custom-color {
+  padding-top: 2vw;
+}
+
+#quantity {
+  width: 30%;
+}
+
+hr {
+  margin: 6vh 0;
+}
+
+.scroll-bottom-space {
+  height: 15vh;
+}
+
+#custom-upload-logo .uk-card canvas {
+  width: 40%;
+  padding: 0;
+}
+#custom-upload-logo #logo-canvas-div {
+  margin-top: 3vh;
+}
 
 /* ======================= Clothing Card Styling ======================= */
-#width-right{
-    text-align: center;
-    margin: 0;
-    padding: 0;
+#width-right {
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
-#clothing-card{
-    height: 60vh;
-    margin-top: 14vh;
-    width: 60%;
-    display: inline-block;
-    padding: 0;
+#clothing-card {
+  height: 60vh;
+  margin-top: 14vh;
+  width: 60%;
+  display: inline-block;
+  padding: 0;
 }
-#clothing-card img{
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+#clothing-card img {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
-#color-options{
-    margin-top: 4vh;
-}
-
-#clothing-card img{
-    padding: 0;
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+#color-options {
+  margin-top: 4vh;
 }
 
-#live-coming-soon{
-    position: absolute;
-    top: 0;
-    left:0;
-    background-color: rgba(0,0,0,0.8);
-    width: 100%;
-    height: 100%;
+#clothing-card img {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }
 
-#live-coming-soon h2{
-   color: rgba(255,255,255,0.8);
-   margin-top:25vh;
-   height: 10vh; 
+#live-coming-soon {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  height: 100%;
 }
 
+#live-coming-soon h2 {
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 25vh;
+  height: 10vh;
+}
 
 /* ======================= Submit Footer ======================= */
-#submit-footer{
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 10vh;
-    background-color: white;
+#submit-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 10vh;
+  background-color: white;
 }
 
-#left-submit{
-    text-align: left;
-    padding-left: 4vw;
-    margin-top: 1vh;
+#left-submit {
+  text-align: left;
+  padding-left: 4vw;
+  margin-top: 1vh;
 }
 
-#left-submit p{
-    margin: 0;
-    padding: 0;
-    font-size: 2vh;
-  
+#left-submit p {
+  margin: 0;
+  padding: 0;
+  font-size: 2vh;
 }
-#left-submit h2{
-    margin: 0;
-    margin-top: -0.5vh;
-    padding: 0;
-    font-size: 4.5vh;
-}
-
-#right-submit{
-    text-align: right;
-    padding-right: 11vw;
-
-    top: 0;
-
-}
-#right-submit button{
-    
-    border-radius: 20px;
-    margin-top: 2.5vh;
-    height: 5vh;
-    width: 200px;
-    border: 1px solid #A22C38;
-    color: #A22C38;
-
-    position: relative;
-    padding: 0;
-
+#left-submit h2 {
+  margin: 0;
+  margin-top: -0.5vh;
+  padding: 0;
+  font-size: 4.5vh;
 }
 
-#right-submit button p{
-    font-size: calc(8px + 1vh);
-    font-weight: 700;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 100%;
-    text-align: center;
+#right-submit {
+  text-align: right;
+  padding-right: 11vw;
+
+  top: 0;
+}
+#right-submit button {
+  border-radius: 20px;
+  margin-top: 2.5vh;
+  height: 5vh;
+  width: 200px;
+  border: 1px solid #a22c38;
+  color: #a22c38;
+
+  position: relative;
+  padding: 0;
 }
 
-#right-submit button:hover{
-    border: none;
-    color: white;
-    background-color:#A22C38;
+#right-submit button p {
+  font-size: calc(8px + 1vh);
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  text-align: center;
+}
+
+#right-submit button:hover {
+  border: none;
+  color: white;
+  background-color: #a22c38;
 }
 
 /* ======================= Intro Instructions ======================= */
 
-#instruct-bg{
-    position: absolute;
-    top: 0;
-    left:0;
-    background-color: rgba(200,200,200,0.85);
-    width: 100%;
-    height: 100%;
-    z-index: 99;
+#instruct-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(200, 200, 200, 0.85);
+  width: 100%;
+  height: 100%;
+  z-index: 99;
 }
 
-#instruct{
-    position: absolute;
-    top: 20vh;
-    left: 22vw;
-    width: 58vw;
-    height: 60vh;
-    z-index: 100;  
-    border-radius: 30px;
-    text-align: center;
+#instruct {
+  position: absolute;
+  top: 20vh;
+  left: 22vw;
+  width: 58vw;
+  height: 60vh;
+  z-index: 100;
+  border-radius: 30px;
+  text-align: center;
 }
 
-#instruct .uk-card{
-    left: 7vw;
-    width: 44vw;
-    height: 60vh; 
-    border-radius: 30px;
-    padding: 0;
+#instruct .uk-card {
+  left: 7vw;
+  width: 44vw;
+  height: 60vh;
+  border-radius: 30px;
+  padding: 0;
 }
 
-#instruct a{
-    color: black;
-} 
-
-#instruct ul{
-    width: 50vw;
-    height: 60vh; 
-    border-radius: 30px;
-    text-align: center;
-}
-#instruct li{
-    width: 40vw;
-    height: 50vh;
-    padding: 5vh 2vw;
-    
-}
-#instruct h1{
-    font-size: calc(30px + 0.6vw);
-    margin-top: 1vw;
-    color: black;
+#instruct a {
+  color: black;
 }
 
-#instruct p{
-    margin-top: 0.2vw;
-    font-size: calc(11px + 0.6vw);
+#instruct ul {
+  width: 50vw;
+  height: 60vh;
+  border-radius: 30px;
+  text-align: center;
+}
+#instruct li {
+  width: 40vw;
+  height: 50vh;
+  padding: 5vh 2vw;
+}
+#instruct h1 {
+  font-size: calc(30px + 0.6vw);
+  margin-top: 1vw;
+  color: black;
 }
 
-#instruct .instruct-img{
-    height: 20vh;
+#instruct p {
+  margin-top: 0.2vw;
+  font-size: calc(11px + 0.6vw);
 }
 
-.center-recaptcha{
-    width: 100%;
-    text-align: center;
-}
-.g-recaptcha{
-    display: inline-block;
-    margin: 0;
-    transform:scale(0.82);
-}
-#instruct button{
-    margin-top: 0.5vh;
-    border: none;
-    color: white;
-    background-color:#A22C38AA;
-    border-radius: 20px;
-    font-weight: 700;
-    opacity: 0.3;
+#instruct .instruct-img {
+  height: 20vh;
 }
 
-#instruct button:hover{
-    background-color: #A22C38AA;
+.center-recaptcha {
+  width: 100%;
+  text-align: center;
+}
+.g-recaptcha {
+  display: inline-block;
+  margin: 0;
+  transform: scale(0.82);
+}
+#instruct button {
+  margin-top: 0.5vh;
+  border: none;
+  color: white;
+  background-color: #a22c38aa;
+  border-radius: 20px;
+  font-weight: 700;
+  opacity: 0.3;
+}
+
+#instruct button:hover {
+  background-color: #a22c38aa;
 }
 
 /* ======================= Beta style ======================= */
-#beta{
-    position:absolute;
-    top: 0;
-    right: 8vw;
-    background-color: #A22C38;
-    border-radius: 0 0 1vh 1vh;
-    color: white;
-    height: 3.5vh;
-    width: 12vh;
-    font-size: 2vh;
-    text-align: center;
+#beta {
+  position: absolute;
+  top: 0;
+  right: 8vw;
+  background-color: #a22c38;
+  border-radius: 0 0 1vh 1vh;
+  color: white;
+  height: 3.5vh;
+  width: 12vh;
+  font-size: 2vh;
+  text-align: center;
 }
 
 /* ======================= Scroll Bar style ======================= */
-    /* width */
-    ::-webkit-scrollbar {
-        width: 5px;
-    }
-    
-    /* Track */
-    ::-webkit-scrollbar-track {
-        background: #ebebeb; 
-    }
-    
-    /* Handle */
-    ::-webkit-scrollbar-thumb {
-        background: #818181; 
-    }
-    
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555; 
-    }
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
 
-  
+/* Track */
+::-webkit-scrollbar-track {
+  background: #ebebeb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #818181;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,3 +1,5 @@
 node_modules/
 .env
 public/temp
+.prettierrc
+.eslintrc.json
