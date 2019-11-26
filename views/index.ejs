@@ -108,7 +108,7 @@
                         <ul class="uk-child-width-expand second-level-menu" uk-tab>
                             <li id="clothing-menu-left"><a href="#">Tees and Tanks</a></li>
                             <li><a href="#">Sweaters and Sleeves</a></li>
-                            <li><a href="#">Pants and Shorts</a></li>
+                            <li><a href="#">Jerseys</a></li>
                             <li id="clothing-menu-right"><a href="#">Accessories and Hats &nbsp;&nbsp;&nbsp;</a></li>
                         </ul>
 
@@ -125,7 +125,7 @@
                                             <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
                                             <h6 class="name"> <%= record.get('Display Name') %> </h6>
                                             <p class="colors"><%= record.get('Count') %>+ Colors... </p>
-                                            <p class="price">Starts at $<%= record.get('Starting Price') %>.00</p>
+                                            <p class="price">Starts at $<%= record.get('Starting Price') %></p>
                                         </div>
                                     </div>
                                     <%}%>
@@ -137,56 +137,64 @@
 
                             <li id="sweaters-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+
+                                        
                                     <% allRecords.forEach(function(record){ %>
                                     <% if(record.get('Product Category')=="Sweaters and Sleeves"){%>
-                                    <div class="clothing-option" value=<%=record.id%>>
+                                    <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
-                                            <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                            <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <h6 class="name"> <%= record.get('Display Name') %> </h6>
+                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="price">Starts at $<%= record.get('Starting Price') %></p>
                                         </div>
-                                    </div>
-                                    <%}%>
-                                   <%})%>
+                                </div>
+                                <%}%>
+                                <%})%>
+
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
 
-
                             </li>
 
-                            <li id="pants-menu" class="clothing-items">
+                            <li id="jersey-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+
+                                        
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if(record.get('Product Category')=="Pants and Shorts"){%>
-                                    <div class="clothing-option" value=<%=record.id%>>
+                                    <% if(record.get('Product Category')=="Jerseys"){%>
+                                    <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
-                                            <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                            <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <h6 class="name"> <%= record.get('Display Name') %> </h6>
+                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="price">Starts at $<%= record.get('Starting Price') %></p>
                                         </div>
                                     </div>
                                     <%}%>
-                                   <%})%>
+                                    <%})%>
+
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
                             </li>
 
                             <li id="accessories-menu" class="clothing-items">
                                 <div class="uk-child-width-1-3@s uk-text-center" uk-grid>
+
+                                    
                                     <% allRecords.forEach(function(record){ %>
                                     <% if(record.get('Product Category')=="Accessories and Hats"){%>
-                                    <div class="clothing-option" value=<%=record.id%>>
+                                    <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
-                                            <img class="clothing-option" value=<%=record.id%> src="imgs\tee.jpg">
-                                            <h6 class="name"> <%= record.get('Name') %> </h6>
-                                            <p class="colors"><%= record.get('Color Options') %>+ Colors... </p>
-                                            <p class="price">Starts at $<%= record.get('AMS Price Small') %>.00</p>
+                                            <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
+                                            <h6 class="name"> <%= record.get('Display Name') %> </h6>
+                                            <p class="colors"><%= record.get('Count') %>+ Colors... </p>
+                                            <p class="price">Starts at $<%= record.get('Starting Price') %></p>
                                         </div>
                                     </div>
                                     <%}%>
-                                   <%})%>
+                                    <%})%>
+
                                 </div>
                                 <div class="clothing-menu-bottom-space"></div>
                             </li>
@@ -201,7 +209,7 @@
                             <h4>Order Quantity</h4>
                             <p>Please review and complete the order details below</p>
                             <div class="uk-form-controls">
-                                    <input class="uk-input" id="quantity" type="number" placeholder="69">
+                                    <input class="uk-input" id="quantity" type="number" placeholder="10">
                         </div>
 
                         <hr>
