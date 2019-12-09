@@ -1,11 +1,11 @@
 //============================= airtable =============================
-require('dotenv').config()
+require('dotenv').config();
 var Airtable = require('airtable');
 const clothingBase = Airtable.base('appmKG59YjZb91BWI');
 const costBase = Airtable.base('app5mCikyR5hw6gLp');
 Airtable.configure({
-    endpointUrl: 'https://api.airtable.com',
-    apiKey: process.env.AIRTABLE_API_KEY,
+  endpointUrl: 'https://api.airtable.com',
+  apiKey: process.env.AIRTABLE_API_KEY
 });
 
 //allRecords will store the first page data from the clothing base (Can store up to 100 records)
@@ -15,206 +15,271 @@ var allColors;
 var logoPrintOptions;
 var clothingRecords = {};
 
-function getAirtableData(){  
+function getAirtableData() {
+  clothingBase('Colors')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      allColors = records;
+    });
 
-    clothingBase('Colors').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-            allColors = records;
-    }); 
+  clothingBase('Logo Print')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      logoPrintOptions = records;
+    });
 
-    clothingBase('Logo Print').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-            logoPrintOptions = records;
-    }); 
+  clothingBase('Clothing')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      allRecords = records;
+      records.forEach(function(record) {
+        // currentRecordName = record.get('Name');
+        // clothingRecords[currentRecordName] = {'id': record.id, 'colorOptions': [], 'logoPrintOptions': [], 'textPrintOptions': []}
+        clothingRecords[record.id] = {
+          colorOptions: [],
+          logoPrintOptions: [],
+          textPrintOptions: [],
+          amsPrice: record.get('AMS Price'),
+          comPrice: record.get('COM Price')
+        };
 
-    clothingBase('Clothing').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        allRecords = records;
-        records.forEach(function(record){
-        
-            // currentRecordName = record.get('Name');
-            // clothingRecords[currentRecordName] = {'id': record.id, 'colorOptions': [], 'logoPrintOptions': [], 'textPrintOptions': []}
-            clothingRecords[record.id] = {'colorOptions': [], 'logoPrintOptions': [], 'textPrintOptions': [], 'amsPrice': record.get('AMS Price'), 'comPrice': record.get('COM Price')}
-            
-           colorOptions = record.get('Color Options');
-            colorOptions && colorOptions.forEach(function(option){
-                clothingRecords[record.id]['colorOptions'].push(option); 
+        colorOptions = record.get('Color Options');
+        colorOptions &&
+          colorOptions.forEach(function(option) {
+            clothingRecords[record.id]['colorOptions'].push(option);
+          });
+
+        logoPrintOptions = record.get('Logo Print Options');
+        logoPrintOptions &&
+          logoPrintOptions.forEach(function(option) {
+            clothingBase('Logo Print').find(option, function(
+              err,
+              logoPrintRecord
+            ) {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              clothingRecords[record.id]['logoPrintOptions'].push(
+                logoPrintRecord.get('Name')
+              );
             });
+          });
 
-            logoPrintOptions = record.get('Logo Print Options');
-            logoPrintOptions && logoPrintOptions.forEach(function(option){
-                clothingBase('Logo Print').find(option, function(err, logoPrintRecord) {
-                    if (err) { console.error(err); return; }
-                    clothingRecords[record.id]['logoPrintOptions'].push(logoPrintRecord.get('Name')); 
-                });
-             
-                
-            });
+        textPrintOptions = record.get('Text Print Options');
+        textPrintOptions &&
+          textPrintOptions.forEach(function(option) {
+            clothingRecords[record.id]['textPrintOptions'].push(option);
+          });
+      });
+    });
+}
 
-            textPrintOptions = record.get('Text Print Options');
-            textPrintOptions && textPrintOptions.forEach(function(option){
-                clothingRecords[record.id]['textPrintOptions'].push(option); 
-            });
-        });
-    });  
+var margins = {},
+  printCost = {},
+  printExtraCosts = {},
+  stitchCost = {},
+  stitchExtraCosts = {};
 
-};
+function getAirtableCostData() {
+  costBase('Margins')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records.forEach(function(record) {
+        margins[record.get('Name')] = record.get('Margin');
+      });
+    });
 
-var margins={}, printCost={}, printExtraCosts={}, stitchCost={}, stitchExtraCosts={};
+  costBase('Printing Additional Charges')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records.forEach(function(record) {
+        printExtraCosts[record.get('Name')] = record.get('Price');
+      });
+    });
 
+  costBase('Stitching Additional Charges')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records.forEach(function(record) {
+        stitchExtraCosts[record.get('Name')] = record.get('Price');
+      });
+    });
 
-function getAirtableCostData(){  
-    
-    costBase('Margins').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        records.forEach(function(record){
-           margins[record.get("Name")] = record.get("Margin");
-        }); 
-    }); 
+  //todo: printcosts and stitchcost
+  costBase('Printing Charges')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records.forEach(function(record) {
+        printCost[record.get('Order Quantity')] = {};
+        for (x = 1; x < 7; x++) {
+          printCost[record.get('Order Quantity')][x] = record.get(x.toString());
+        }
+      });
+    });
 
-    costBase('Printing Additional Charges').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        records.forEach(function(record){
-           printExtraCosts[record.get("Name")] = record.get("Price");
-        }); 
-    }); 
-
-    costBase('Stitching Additional Charges').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        records.forEach(function(record){
-            stitchExtraCosts[record.get("Name")] = record.get("Price");
-        }); 
-    }); 
-
-    //todo: printcosts and stitchcost
-    costBase('Printing Charges').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        records.forEach(function(record){
-            printCost[record.get("Order Quantity")] = {};
-            for(x=1; x<7; x++){
-            printCost[record.get("Order Quantity")][x] = record.get(x.toString());   
-            }
-        });   
-    }); 
-
-    costBase('Stitching Charges').select({
-        view: 'Grid view'
-    }).firstPage(function(err, records) {
-        if (err) { console.error(err); return; }
-        records.forEach(function(record){
-            stitchCost[record.get("Order Quantity")] = {};
-            for(x=1999; x<30000; x+= 1000){
-            stitchCost[record.get("Order Quantity")][x] = record.get(x.toString());   
-            }
-        });  
-        
-    }); 
-};
+  costBase('Stitching Charges')
+    .select({
+      view: 'Grid view'
+    })
+    .firstPage(function(err, records) {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      records.forEach(function(record) {
+        stitchCost[record.get('Order Quantity')] = {};
+        for (x = 1999; x < 30000; x += 1000) {
+          stitchCost[record.get('Order Quantity')][x] = record.get(
+            x.toString()
+          );
+        }
+      });
+    });
+}
 
 //calling both to retrieve data when server loadas
-getAirtableData()
-getAirtableCostData()
-
+getAirtableData();
+getAirtableCostData();
 
 //============================= express setup =============================
 //setting up app (aka getting express, view engine, and static files good to go)
 var express = require('express');
 var app = express();
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
-
 
 //============================= All paths =============================
 //Load webapp
 app.get('/', (req, res) => {
-    res.render('index', {allRecords, clothingRecords, allColors, logoPrintOptions});
+  if (!process.env.NODE_ENV) {
+    getAirtableData();
+    getAirtableCostData();
+  }
+  res.render('index', {
+    allRecords,
+    clothingRecords,
+    allColors,
+    logoPrintOptions
+  });
 });
 
 //admin page is to resync data
-app.get('/admin', (req, res) => { 
-    getAirtableData()
-    getAirtableCostData()
-    res.send(
-        "<h1>All Clothing Records</h1>" +
-        JSON.stringify(allRecords) +
-        "<h1>Clothing Defaults and ids</h1>" +
-        JSON.stringify(clothingRecords) +
-        "<h1>All Colors</h1>" +
-        JSON.stringify(allColors)
-        );
+app.get('/admin', (req, res) => {
+  getAirtableData();
+  getAirtableCostData();
+  res.send(
+    '<h1>All Clothing Records</h1>' +
+      JSON.stringify(allRecords) +
+      '<h1>Clothing Defaults and ids</h1>' +
+      JSON.stringify(clothingRecords) +
+      '<h1>All Colors</h1>' +
+      JSON.stringify(allColors)
+  );
 });
 
 //sending clothing records to front end js
 app.get('/allRecords', (req, res) => {
-    res.send(allRecords);
+  res.send(allRecords);
 });
 
 app.get('/allColors', (req, res) => {
-    res.send(allColors);
+  res.send(allColors);
 });
 
 app.get('/clothingRecords', (req, res) => {
-    res.send(clothingRecords);
+  res.send(clothingRecords);
 });
 
 app.get('/logoPrintOptions', (req, res) => {
-    res.send(logoPrintOptions);
+  res.send(logoPrintOptions);
 });
-
 
 //sending cost records to front end js
 app.get('/margins', (req, res) => {
-    res.send(margins);
+  res.send(margins);
 });
 
 app.get('/printCost', (req, res) => {
-    res.send(printCost);
+  res.send(printCost);
 });
 
 app.get('/printExtraCosts', (req, res) => {
-    res.send(printExtraCosts);
+  res.send(printExtraCosts);
 });
 
 app.get('/stitchCost', (req, res) => {
-    res.send(stitchCost);
+  res.send(stitchCost);
 });
 
 app.get('/stitchExtraCosts', (req, res) => {
-    res.send(stitchExtraCosts);
+  res.send(stitchExtraCosts);
 });
 
 //============================= nodemailer =============================
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const nodemailer= require('nodemailer');
+const nodemailer = require('nodemailer');
 const nodemailerMailgun = require('nodemailer-mailgun-transport');
 
-let transporter = nodemailer.createTransport(nodemailerMailgun({auth: {
-    api_key: process.env.MAILGUN_API_KEY,
-    domain: process.env.MAILGUN_DOMAIN,
-}}));
+let transporter = nodemailer.createTransport(
+  nodemailerMailgun({
+    auth: {
+      api_key: process.env.MAILGUN_API_KEY,
+      domain: process.env.MAILGUN_DOMAIN
+    }
+  })
+);
 
-logoName = "";
-textName = "";
+logoName = '';
+textName = '';
 
 app.post('/email', (req, res) => {
-        const emailBody =`
+  const emailBody = `
             <h2>OTD App Order</h2>
 
             <hr/>
@@ -266,57 +331,56 @@ app.post('/email', (req, res) => {
                 <li>Setup Cost: ${req.body.margin}</li>
             </ul>
             `;
-        
-            const mailOptions = {
-                from: '"OTD Custom Order App" <me@samples.mailgun.org>', // sender address
-                to: 'otdstaff@gmail.com', // list of receivers
-                subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
-                text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
-                html: emailBody, // html body
-                attachments: [
-                   
-                    {   
-                        filename: 'logo.png',
-                        path: "public/temp/uploads/".concat(logoName)
-                    },
-                    {   
-                        filename: 'text.xlsx',
-                        path: "public/temp/uploads/".concat(textName)
-                    }
-                ]
-            }
-       
-            transporter.sendMail(mailOptions, function(err, data){
-                if (err){
-                    console.log("Error: ", err);
-                }else{
-                    console.log("submit");
-                }
-            });
-});
 
+  const mailOptions = {
+    from: '"OTD Custom Order App" <me@samples.mailgun.org>', // sender address
+    to: 'otdstaff@gmail.com', // list of receivers
+    subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
+    text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
+    html: emailBody, // html body
+    attachments: [
+      {
+        filename: 'logo.png',
+        path: 'public/temp/uploads/'.concat(logoName)
+      },
+      {
+        filename: 'text.xlsx',
+        path: 'public/temp/uploads/'.concat(textName)
+      }
+    ]
+  };
+
+  transporter.sendMail(mailOptions, function(err, data) {
+    if (err) {
+      console.log('Error: ', err);
+    } else {
+      console.log('submit');
+    }
+  });
+});
 
 //============================= attachments =============================
 const multer = require('multer');
-const upload = multer({dest: 'public/temp/uploads'});
+const upload = multer({ dest: 'public/temp/uploads' });
 
-app.post("/logoUpload", upload.single('logo'), (req,res) =>{
-    logoName = req.file.filename;
-    res.sendStatus(204);
-})
-app.get("/logoUpload", (req,res) =>{
-    res.send({"logoName": logoName});
-})
+app.post('/logoUpload', upload.single('logo'), (req, res) => {
+  logoName = req.file.filename;
+  res.sendStatus(204);
+});
+app.get('/logoUpload', (req, res) => {
+  res.send({ logoName: logoName });
+});
 
-app.post("/textUpload", upload.single('text'), (req,res) =>{
-    textName = req.file.filename;
-    res.sendStatus(204);
-})
-app.get("/textUpload", (req,res) =>{
-    res.send({"textName": textName});
-})
+app.post('/textUpload', upload.single('text'), (req, res) => {
+  textName = req.file.filename;
+  res.sendStatus(204);
+});
+app.get('/textUpload', (req, res) => {
+  res.send({ textName: textName });
+});
 
-
-
-app.listen(3000); 
-
+if (!process.env.NODE_ENV) {
+  app.listen(3000);
+} else {
+  app.listen(80);
+}
