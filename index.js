@@ -1,6 +1,7 @@
-//============================= airtable =============================
+// ============================= airtable =============================
 require('dotenv').config();
-var Airtable = require('airtable');
+const Airtable = require('airtable');
+
 const clothingBase = Airtable.base('appmKG59YjZb91BWI');
 const costBase = Airtable.base('app5mCikyR5hw6gLp');
 Airtable.configure({
@@ -8,12 +9,12 @@ Airtable.configure({
   apiKey: process.env.AIRTABLE_API_KEY
 });
 
-//allRecords will store the first page data from the clothing base (Can store up to 100 records)
+// allRecords will store the first page data from the clothing base (Can store up to 100 records)
 
-var allRecords;
-var allColors;
-var logoPrintOptions;
-var clothingRecords = {};
+let allRecords;
+let allColors;
+let logoPrintOptions;
+let clothingRecords;
 
 function getAirtableData() {
   clothingBase('Colors')
@@ -61,7 +62,7 @@ function getAirtableData() {
           comPrice: record.get('COM Price')
         };
 
-        colorOptions = record.get('Color Options');
+        let colorOptions = record.get('Color Options');
         colorOptions &&
           colorOptions.forEach(function(option) {
             clothingRecords[record.id]['colorOptions'].push(option);
@@ -372,7 +373,7 @@ app.get('/logoUpload', (req, res) => {
 });
 
 app.post('/textUpload', upload.single('text'), (req, res) => {
-  textName = req.file.filename;
+  var textName = req.file.filename;
   res.sendStatus(204);
 });
 app.get('/textUpload', (req, res) => {
