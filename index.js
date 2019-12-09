@@ -14,7 +14,7 @@ Airtable.configure({
 let allRecords;
 let allColors;
 let logoPrintOptions;
-let clothingRecords;
+let clothingRecords = {};
 
 function getAirtableData() {
   clothingBase('Colors')
