@@ -345,11 +345,11 @@ app.post('/email', (req, res) => {
     html: emailBody, // html body
     attachments: [
       {
-        filename: 'logo.png',
+        filename: req.body.org.concat('-', 'logo.png'),
         path: 'public/temp/uploads/'.concat(req.body.logoMulterFile)
       },
       {
-        filename: 'text.xlsx',
+        filename: req.body.org.concat('-', 'list.xlsx'),
         path: 'public/temp/uploads/'.concat(req.body.textMulterFile)
       }
     ]
