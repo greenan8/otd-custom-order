@@ -11,6 +11,8 @@ $('.clothing-option').on('mousedown', function() {
   orderDetails.name = $(this)
     .find('h6.name')
     .text();
+
+  $('#selected-span').text(orderDetails.name);
   var colorList = clothingRecords[currentID].colorOptions;
 
   //change the color options under custom
@@ -321,7 +323,30 @@ $('#start-design').mouseleave(function() {
 
 //============================= When submit is clicked =============================
 $('#submit').click(function() {
-  //check if all needed data is filled
-  console.log(orderDetails);
-  $.post('/email', orderDetails);
+  //check if all needed data is
+  if (
+    !(
+      orderDetails.name &&
+      orderDetails.quantity &&
+      orderDetails.fullName &&
+      orderDetails.email &&
+      orderDetails.phone &&
+      orderDetails.org &&
+      orderDetails.ratified
+    )
+  ) {
+    UIkit.modal.alert(
+      'You have not filled out all required fields (denoted by <span class="required-star">*</span>)'
+    );
+  } else {
+    console.log(orderDetails);
+    $.post('/email', orderDetails);
+    UIkit.modal
+      .alert(
+        "Your submission has been sent to OTD's sales team and your provided email has been CC'd. They will be in contact with you soon."
+      )
+      .then(function() {
+        window.location.href = 'https://oilthighdesigns.ca/';
+      });
+  }
 });

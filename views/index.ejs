@@ -14,7 +14,7 @@
 
 
 <body>
-
+    <% if(production){%>
     <!-- ======================== Opening Welcome Menu ======================== -->
     <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
         <div class="fade-in-target" uk-slideshow="animation: fade;">
@@ -82,8 +82,15 @@
         <button class="uk-button uk-button-default fade-in-target" id="start-design" disabled>START YOUR DESIGN</button>
     </div>
     <div id="instruct-bg"></div>
+    <%}%>
     <div id="beta" title="You may find minor bugs and some functionality has not yet been implemented.&#013; If you come across any major issues, email: otdsales@gmail.com">
-        <p>Beta</p>
+        
+            <% if(production){%>
+                <p>Beta</p>
+            <%}else{%>
+                <p>Dev</p> 
+            <%}%>
+        
     </div>
     <div class="content" uk-grid>
 
@@ -205,51 +212,60 @@
                     <!-- ======================== 2. Info input form ======================== -->
                     <li id="order-details">
 
+                        <div id="garment-selection">
+                            <h4>Selected Garment<span class="required-star">*</span></h4>
+                            <p>The garment currently selected is: <strong><span id="selected-span"></span></strong></p>
+                            </div>
+                        </div>
+
+                        <hr>
+                        
                         <div id="custom-quantity">
-                            <h4>Order Quantity</h4>
-                            <p>Please review and complete the order details below</p>
+                            <h4>Order Quantity<span class="required-star">*</span></h4>
+                            <p>Please fill out your estimated order quantity below</p>
                             <div class="uk-form-controls">
                                     <input class="uk-input" id="quantity" type="number" placeholder="10">
+                            </div>
                         </div>
 
                         <hr>
 
                         <div id="contact-details">
                             <h4>Contact Details</h4>
-                            <p>Please fill out the contact detials below</p>
+                            <p>Please fill out the contact details below</p>
                             
 
                             <form class="uk-form-horizontal uk-margin-large">
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="full-name">Full Name</label>
+                                <label class="uk-form-label" for="full-name">Full Name<span class="required-star">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="full-name" type="text" placeholder="John Doe">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="email">Email Address</label>
+                                <label class="uk-form-label" for="email">Email<span class="required-star">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="email" type="email" placeholder="@queensu.ca">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="phone">Phone Number</label>
+                                <label class="uk-form-label" for="phone">Phone Number<span class="required-star">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="phone" type="phone" placeholder="999-999-9999">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="org">Your Organization</label>
+                                <label class="uk-form-label" for="org">Your Organization<span class="required-star">*</span></label>
                                 <div class="uk-form-controls">
                                     <input class="uk-input" id="org" type="tel" placeholder="Oil Thigh Designs">
                                 </div>
                             </div>
 
                             <div class="uk-margin">
-                                <label class="uk-form-label" for="ratified">Ratified Under</label>
+                                <label class="uk-form-label" for="ratified">Ratified Under<span class="required-star">*</span></label>
                                 <div class="uk-form-controls">
                                     <select class="uk-select" id="ratified">
                                         <option value =""></option>

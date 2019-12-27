@@ -199,11 +199,15 @@ app.get('/', (req, res) => {
     getAirtableData();
     getAirtableCostData();
   }
+
+  production = process.env.NODE_ENV;
+
   res.render('index', {
     allRecords,
     clothingRecords,
     allColors,
-    logoPrintOptions
+    logoPrintOptions,
+    production
   });
 });
 

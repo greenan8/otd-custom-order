@@ -153,6 +153,10 @@ option {
   margin-right: -2vw;
 }
 
+span.required-star {
+  color: red;
+}
+
 /* ========= Cusomization Styling ============ */
 #customization-items {
   overflow: scroll;
