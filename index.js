@@ -346,11 +346,11 @@ app.post('/email', (req, res) => {
     attachments: [
       {
         filename: 'logo.png',
-        path: 'public/temp/uploads/'.concat(logoName)
+        path: 'public/temp/uploads/'.concat(req.body.logoMulterFile)
       },
       {
         filename: 'text.xlsx',
-        path: 'public/temp/uploads/'.concat(textName)
+        path: 'public/temp/uploads/'.concat(req.body.textMulterFile)
       }
     ]
   };
@@ -366,22 +366,29 @@ app.post('/email', (req, res) => {
 
 //============================= attachments =============================
 const multer = require('multer');
+const fs = require('fs');
 const upload = multer({ dest: 'public/temp/uploads' });
 
 app.post('/logoUpload', upload.single('logo'), (req, res) => {
-  logoName = req.file.filename;
+  fs.rename(
+    'public/temp/uploads/'.concat(req.file.filename),
+    'public/temp/uploads/'.concat(req.body.ustring),
+    function(err) {
+      if (err) console.log('ERROR: ' + err);
+    }
+  );
   res.sendStatus(204);
-});
-app.get('/logoUpload', (req, res) => {
-  res.send({ logoName: logoName });
 });
 
 app.post('/textUpload', upload.single('text'), (req, res) => {
-  var textName = req.file.filename;
+  fs.rename(
+    'public/temp/uploads/'.concat(req.file.filename),
+    'public/temp/uploads/'.concat(req.body.ustring),
+    function(err) {
+      if (err) console.log('ERROR: ' + err);
+    }
+  );
   res.sendStatus(204);
-});
-app.get('/textUpload', (req, res) => {
-  res.send({ textName: textName });
 });
 
 if (!process.env.NODE_ENV) {

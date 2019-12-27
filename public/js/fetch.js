@@ -65,31 +65,3 @@ fetch('/stitchExtraCosts').then(response => {
     stitchExtraCosts = json;
   });
 });
-
-// eslint-disable-next-line no-unused-vars
-function fetchLogoMulterFile() {
-  setTimeout(function() {
-    fetch('/logoUpload').then(response => {
-      response.json().then(json => {
-        orderDetails.logoMulterFile = json.logoName;
-        if (json.logoName !== '') {
-          orderDetails.logoSubmitted = true;
-        }
-      });
-    });
-  }, 1000);
-}
-
-// eslint-disable-next-line no-unused-vars
-function fetchTextMulterFile() {
-  setTimeout(function() {
-    fetch('/textUpload').then(response => {
-      response.json().then(json => {
-        orderDetails.textMulterFile = json.textName;
-        if (json.textName !== '') {
-          orderDetails.textSubmitted = true;
-        }
-      });
-    });
-  }, 1000);
-}

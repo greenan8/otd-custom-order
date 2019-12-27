@@ -1,3 +1,18 @@
+//============================= Creating Random unique String =============================
+$(window).on('load', function() {
+  var result = '';
+  var characters =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var charactersLength = characters.length;
+  for (var i = 0; i < 20; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  orderDetails.logoMulterFile = result.concat('.png');
+  $('#logo-ustring').val(orderDetails.logoMulterFile);
+  orderDetails.textMulterFile = result.concat('.xlsx');
+  $('#text-ustring').val(orderDetails.textMulterFile);
+});
+
 //============================= Removes intial instructions =============================
 $('#start-design').click(function() {
   $('#instruct').fadeOut();
