@@ -41,6 +41,19 @@ $('.clothing-option').on('mousedown', function() {
     );
   }
 
+  //change right side img
+  $('#live-img').attr(
+    'src',
+    $(this)
+      .find('img.clothing-option')
+      .attr('src')
+  );
+
+  //move to page 2
+  setTimeout(function() {
+    $('#2-button').trigger('click');
+  }, 500);
+
   //run estimate price again
   updateEstimate();
 });
@@ -111,12 +124,7 @@ $('#logo-position-options').change(function() {
 //============================= When logo submitted, upload, add to canvas, and analyze =============================
 $('#logo-upload').change(function() {
   if (this.files[0]['type'] != 'image/png') {
-    UIkit.notification({
-      message: 'That was not a png image',
-      status: 'warning',
-      pos: 'top-center',
-      timeout: 5000
-    });
+    UIkit.modal.alert('That was not a png image');
   } else {
     orderDetails.logoFile = URL.createObjectURL(this.files[0]);
     $('#logo-upload-button').text(this.files[0]['name']);
@@ -327,6 +335,7 @@ $('#submit').click(function() {
   if (
     !(
       orderDetails.name &&
+      orderDetails.colorName &&
       orderDetails.quantity &&
       orderDetails.fullName &&
       orderDetails.email &&

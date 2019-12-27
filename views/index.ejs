@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 
 <head>
-    <!-- <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+    <meta charset="utf-8">
     <title></title>
-    <!-- <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\uikit.min.css" />
     <link rel="stylesheet" href="css\stylesheet.css" />
@@ -101,9 +99,9 @@
 
                 <!-- ======================== Top level menu ======================== -->
                 <div id="top-level-menu" uk-switcher="animation: uk-animation-fade; toggle: > *">
-                    <button id="top-level-left" class="uk-button uk-button-default uk-text-nowrap" type="button">1. Choose Apparel</button>
-                    <button class="uk-button uk-button-default uk-text-nowrap" type="button">2. Order Details</button>
-                    <button id="top-level-right" class="uk-button uk-button-default uk-text-nowrap" type="button">3. Add Customization</button>
+                    <button id="top-level-left" class="uk-button uk-button-default uk-text-nowrap" type="button" id="1-button">1. Choose Apparel</button>
+                    <button class="uk-button uk-button-default uk-text-nowrap" type="button" id="2-button">2. Order Details</button>
+                    <button id="top-level-right" class="uk-button uk-button-default uk-text-nowrap" type="button" id="3-button">3. Add Customization</button>
                 </div>
                 <ul class="uk-switcher uk-margin">
 
@@ -215,11 +213,19 @@
                         <div id="garment-selection">
                             <h4>Selected Garment<span class="required-star">*</span></h4>
                             <p>The garment currently selected is: <strong><span id="selected-span"></span></strong></p>
-                            </div>
                         </div>
 
                         <hr>
-                        
+
+                        <div id="custom-color">
+                            <h4>Select Clothing Color<span class="required-star">*</span></h4>
+                            <% allColors.forEach(function(record){ %>
+                            <span class="dot" title= <%= record.get("Name");%> value= <%= record.get("Hex");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
+                            <% }); %>
+
+                            <hr>
+                        </div>
+
                         <div id="custom-quantity">
                             <h4>Order Quantity<span class="required-star">*</span></h4>
                             <p>Please fill out your estimated order quantity below</p>
@@ -281,7 +287,7 @@
                             </div>
                             </form>   
                         </div>
-                    </div>
+                   
 
 
                     
@@ -290,18 +296,7 @@
 
                     <!-- ======================== 3. Customization ======================== -->
                     <li id="customization-items">
-                        <div id="custom-color">
-                            <h4>Select Clothing Color</h4>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <span class="dot"></span>
-                            <% allColors.forEach(function(record){ %>
-                            <span class="dot" title= <%= record.get("Name");%> value= <%= record.get("Hex");%> style="background-color:<%= record.get("Hex");%>" id= <%= record.id ;%> hidden></span>
-                            <% }); %>
-
-                            <hr>
-                        </div>
+                       
                         <div id="custom-upload-logo">
                             <h4>Add Logo</h4>
                             <p>Upload a high quality PNG image of your custom logo</p>
@@ -427,7 +422,7 @@
                 <div id="live-coming-soon">
                     <h2>Live preview is coming soon!</h2>
                 </div>
-                <img src="imgs\tee.jpg">
+                <img id="live-img" src="imgs\tee.jpg">
                 
             </div>
             <div id="color-options">
