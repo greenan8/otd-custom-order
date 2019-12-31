@@ -88,7 +88,18 @@ function getAirtableData() {
         textPrintOptions = record.get('Text Print Options');
         textPrintOptions &&
           textPrintOptions.forEach(function(option) {
-            clothingRecords[record.id]['textPrintOptions'].push(option);
+            clothingBase('Text Print').find(option, function(
+              err,
+              textPrintRecord
+            ) {
+              if (err) {
+                console.error(err);
+                return;
+              }
+              clothingRecords[record.id]['textPrintOptions'].push(
+                textPrintRecord.get('Name')
+              );
+            });
           });
       });
     });

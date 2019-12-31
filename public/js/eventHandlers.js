@@ -56,6 +56,19 @@ $('.clothing-option').on('mousedown', function() {
     );
   }
 
+  $('.text-print-option').remove();
+  $('#text-position-options').val('');
+  orderDetails.logoPosition = '';
+  for (p in clothingRecords[currentID]['textPrintOptions']) {
+    $('#text-position-options').append(
+      '<option class="text-print-option" value="' +
+        clothingRecords[currentID]['textPrintOptions'][p] +
+        '">' +
+        clothingRecords[currentID]['textPrintOptions'][p] +
+        '</option>'
+    );
+  }
+
   //change right side img
   $('#live-img').attr(
     'src',
@@ -105,6 +118,7 @@ $('.dot').click(function() {
   orderDetails.colorID = $(this).attr('id');
   orderDetails.colorName = $(this).attr('title');
   orderDetails.colorHex = $(this).attr('value');
+  $('#selected-color-span').text(orderDetails.colorName);
   //TODO: change image on live preview
 });
 
