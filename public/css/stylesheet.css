@@ -110,7 +110,7 @@ html {
   font-size: calc(9px + 0.5vw);
 }
 .clothing-menu-bottom-space {
-  height: 8vh;
+  height: 10vh;
 }
 .clothing-items .uk-card:active {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);

@@ -37,6 +37,7 @@ $('.clothing-option').on('mousedown', function() {
   orderDetails.colorHex = '';
   orderDetails.colorID = '';
   orderDetails.colorName = '';
+  $('#selected-color-span').text(orderDetails.colorName);
 
   colorList.forEach(e => {
     $('span.dot#' + e).attr('hidden', false);

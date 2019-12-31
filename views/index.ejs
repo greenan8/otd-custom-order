@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>CUSTOM ORDER - Oil Thigh Designs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css\uikit.min.css" />
@@ -16,7 +16,7 @@
     <% if(production){%>
     <!-- ======================== Opening Welcome Menu ======================== -->
     <div id="instruct"  uk-scrollspy="cls: uk-animation-fade; target: .fade-in-target; delay: 1000">
-        <div class="fade-in-target" uk-slideshow="animation: fade;">
+        <div class="fade-in-target" uk-slideshow>
 
             <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" >
                 <div class="uk-card uk-card-default uk-card-body">
@@ -51,9 +51,9 @@
                         <img src="imgs\instruct-3.svg" alt="" class="instruct-img"> 
                         <h1>Step Three</h1>
                         <p>
-                            Step three is inputing your custom selections to make your order yours.
-                            Once done make sure to hit submit at the bottom and it will begin an email thread
-                            between our custom sales team and the email details you provided.
+                            Step three is inputing your custom logo and text if applicable.
+                            Once done make sure to hit submit at the bottom. This will send us your Info
+                            and a sales reps will reach out shortly afterwords.
                         </p>
                     </li>
                     <li>
@@ -220,9 +220,13 @@
 
                         <div id="custom-color">
                             <h4>Select Clothing Color<span class="required-star">*</span></h4>
-                            <% allColors.forEach(function(record){ %>
-                            <span class="dot" title="<%= record.get("Name");%>" value="<%= record.get("Hex");%>" style="background-color:<%= record.get("Hex");%>" id="<%= record.id ;%>" hidden></span>
-                            <% }); %>
+                            <div>
+                                <% allColors.forEach(function(record){ %>
+                                    <span class="dot" title="<%= record.get("Name");%>" value="<%= record.get("Hex");%>" 
+                                    style="background-color:<%= record.get("Hex");%>" id="<%= record.id ;%>" hidden>
+                                    </span>
+                                <% }); %>
+                            </div>
                             <p>The color currently selected is: <strong><span id="selected-color-span"></span></strong></p>
                             <hr>
                         </div>
@@ -440,7 +444,7 @@
                 <h2 id="estimate">$0.00</h2>
             </div>
             <div id="right-submit">
-                <button class="uk-button uk-button-default" id="submit"><p>Submit Order</p></button>
+                <button class="uk-button uk-button-default" id="submit"><p>Submit Details</p></button>
             </div>
         </div>
     </div>
