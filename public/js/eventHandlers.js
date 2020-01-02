@@ -378,14 +378,20 @@ $('#submit').click(function() {
       'You have not filled out all required fields (denoted by <span class="required-star">*</span>)'
     );
   } else {
-    console.log(orderDetails);
-    $.post('/email', orderDetails);
-    UIkit.modal
-      .alert(
-        "Your submission has been sent to OTD's sales team and your provided email has been CC'd. They will be in contact with you soon."
-      )
-      .then(function() {
-        window.location.href = 'https://oilthighdesigns.ca/';
+    $.post('/email', orderDetails)
+      .done(function() {
+        UIkit.modal
+          .alert(
+            "Your submission has been sent to OTD's sales team and your provided email has been CC'd. They will be in contact with you soon."
+          )
+          .then(function() {
+            window.location.href = 'https://oilthighdesigns.ca/';
+          });
+      })
+      .fail(function() {
+        UIkit.modal.alert(
+          "<strong>Uhoh! Something went wrong.</strong> Try again but if the issue persists, contact us at: <a href='mailto:otdsales@gmail.com'>otdsales@gmail.com</a>"
+        );
       });
   }
 });

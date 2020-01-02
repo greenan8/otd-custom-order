@@ -280,19 +280,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const nodemailer = require('nodemailer');
-const nodemailerMailgun = require('nodemailer-mailgun-transport');
 
-let transporter = nodemailer.createTransport(
-  nodemailerMailgun({
-    auth: {
-      api_key: process.env.MAILGUN_API_KEY,
-      domain: process.env.MAILGUN_DOMAIN
-    }
-  })
-);
-
-logoName = '';
-textName = '';
+let transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
+  auth: {
+    type: 'OAuth2',
+    user: process.env.SEND_EMAIL,
+    clientId: process.env.SEND_CLIENT_SECRET,
+    clientSecret: process.env.SEND_CLIENT_SECRET,
+    refreshToken: process.env.SEND_REFRESH_TOKEN,
+    accessToken: process.env.SEND_ACCESS_TOKEN
+  }
+});
 
 app.post('/email', (req, res) => {
   const emailBody = `
@@ -349,8 +350,9 @@ app.post('/email', (req, res) => {
             `;
 
   const mailOptions = {
-    from: '"OTD Custom Order App" <me@samples.mailgun.org>', // sender address
-    to: 'otdstaff@gmail.com', // list of receivers
+    from: `"OTD Custom Order App" <${process.env.SEND_EMAIL}>`, // sender address
+    to: process.env.SALES_EMAIL, // list of receivers
+    cc: req.body.email,
     subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
     text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
     html: emailBody, // html body
@@ -369,8 +371,9 @@ app.post('/email', (req, res) => {
   transporter.sendMail(mailOptions, function(err, data) {
     if (err) {
       console.log('Error: ', err);
+      res.sendStatus(400);
     } else {
-      console.log('submit');
+      res.sendStatus(204);
     }
   });
 });
