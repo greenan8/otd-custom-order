@@ -340,9 +340,25 @@ app.post('/email', (req, res) => {
                 <li>Unit Logo Cost: ${req.body.printPrice}</li>
                 <li>Unit Text Cost: ${req.body.textPrice}</li>
                 <li>Setup Cost: ${req.body.setupCost}</li>
-                <li>Setup Cost: ${req.body.margin}</li>
             </ul>
             `;
+
+  let pngPath = 'public/temp/uploads/'.concat(req.body.logoMulterFile);
+  let xlsxPath = 'public/temp/uploads/'.concat(req.body.textMulterFile);
+  let attach = [];
+
+  if (fs.existsSync(pngPath)) {
+    attach.push({
+      filename: req.body.org.concat('-', 'logo.png'),
+      path: pngPath
+    });
+  }
+  if (fs.existsSync(xlsxPath)) {
+    attach.push({
+      filename: req.body.org.concat('-', 'list.xlsx'),
+      path: xlsxPath
+    });
+  }
 
   const mailOptions = {
     from: `"OTD Custom Order App" <${process.env.SEND_EMAIL}>`, // sender address
@@ -351,25 +367,7 @@ app.post('/email', (req, res) => {
     subject: `${req.body.fullName}'s Custom Submission`, // Subject line
     text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
     html: emailBody, // html body
-    attachments: function(
-      pngPath = 'public/temp/uploads/'.concat(req.body.logoMulterFile),
-      xlsxPath = 'public/temp/uploads/'.concat(req.body.textMulterFile)
-    ) {
-      let attach = [];
-
-      if (fs.existsSync(pngPath)) {
-        attach.push({
-          filename: req.body.org.concat('-', 'logo.png'),
-          path: pngPath
-        });
-      }
-      if (fs.existsSync(xlsxPath)) {
-        attach.push({
-          filename: req.body.org.concat('-', 'list.xlsx'),
-          path: xlsxPath
-        });
-      }
-    }
+    attachments: attach
   };
 
   transporter.sendMail(mailOptions, function(err, data) {
@@ -379,13 +377,18 @@ app.post('/email', (req, res) => {
     } else {
       res.sendStatus(204);
 
-      fs.unlink('public/temp/uploads/'.concat(req.body.logoMulterFile), err => {
-        if (err) throw err;
-      });
-
-      fs.unlink('public/temp/uploads/'.concat(req.body.textMulterFile), err => {
-        if (err) throw err;
-      });
+      setTimeout(function() {
+        if (fs.existsSync(pngPath)) {
+          fs.unlink(pngPath, err => {
+            if (err) throw err;
+          });
+        }
+        if (fs.existsSync(xlsxPath)) {
+          fs.unlink(xlsxPath, err => {
+            if (err) throw err;
+          });
+        }
+      }, 20000);
     }
   });
 });

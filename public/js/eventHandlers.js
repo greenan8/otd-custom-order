@@ -309,11 +309,7 @@ function updateEstimate() {
     setupCost = (stitchExtraCosts['Digitizing Cost'] * stitchCount) / 1000;
 
     textPrice = 0;
-    if (
-      $('#text-position-options').val() == 'Back' ||
-      $('#text-position-options').val() == 'Left' ||
-      $('#text-position-options').val() == 'Right'
-    ) {
+    if ($('#text-position-options').val() != '') {
       // assume two line text for now
       textPrice = stitchExtraCosts['Two Line Text'];
     }
