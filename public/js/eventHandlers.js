@@ -231,11 +231,16 @@ function logoAnalysis() {
       $('#print').text(orderDetails.logoColorNum.toString().concat(' Colors'));
     }
 
-    !colorCount['10101010'] ||
-      (orderDetails.logoTransparency = (
+    console.log(colorCount['10101010']);
+    if (!colorCount['10101010']) {
+      orderDetails.logoTransparency = 1;
+    } else {
+      orderDetails.logoTransparency = (
         1 -
         colorCount['10101010'] / (imgData.data.length / 4)
-      ).toFixed(3));
+      ).toFixed(3);
+    }
+
     $('#stitch').text(
       Math.round(orderDetails.logoTransparency * 100)
         .toString()
