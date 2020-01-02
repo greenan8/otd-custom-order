@@ -284,14 +284,9 @@ const nodemailer = require('nodemailer');
 let transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true,
   auth: {
-    type: 'OAuth2',
     user: process.env.SEND_EMAIL,
-    clientId: process.env.SEND_CLIENT_SECRET,
-    clientSecret: process.env.SEND_CLIENT_SECRET,
-    refreshToken: process.env.SEND_REFRESH_TOKEN,
-    accessToken: process.env.SEND_ACCESS_TOKEN
+    pass: process.env.SEND_PASS
   }
 });
 
@@ -353,19 +348,28 @@ app.post('/email', (req, res) => {
     from: `"OTD Custom Order App" <${process.env.SEND_EMAIL}>`, // sender address
     to: process.env.SALES_EMAIL, // list of receivers
     cc: req.body.email,
-    subject: `Order From ${req.body.fullName} with ${req.body.org}`, // Subject line
+    subject: `${req.body.fullName}'s Custom Submission`, // Subject line
     text: `Order From ${req.body.fullName} with ${req.body.org}`, // plain text body
     html: emailBody, // html body
-    attachments: [
-      {
-        filename: req.body.org.concat('-', 'logo.png'),
-        path: 'public/temp/uploads/'.concat(req.body.logoMulterFile)
-      },
-      {
-        filename: req.body.org.concat('-', 'list.xlsx'),
-        path: 'public/temp/uploads/'.concat(req.body.textMulterFile)
+    attachments: function(
+      pngPath = 'public/temp/uploads/'.concat(req.body.logoMulterFile),
+      xlsxPath = 'public/temp/uploads/'.concat(req.body.textMulterFile)
+    ) {
+      let attach = [];
+
+      if (fs.existsSync(pngPath)) {
+        attach.push({
+          filename: req.body.org.concat('-', 'logo.png'),
+          path: pngPath
+        });
       }
-    ]
+      if (fs.existsSync(xlsxPath)) {
+        attach.push({
+          filename: req.body.org.concat('-', 'list.xlsx'),
+          path: xlsxPath
+        });
+      }
+    }
   };
 
   transporter.sendMail(mailOptions, function(err, data) {
@@ -374,6 +378,14 @@ app.post('/email', (req, res) => {
       res.sendStatus(400);
     } else {
       res.sendStatus(204);
+
+      fs.unlink('public/temp/uploads/'.concat(req.body.logoMulterFile), err => {
+        if (err) throw err;
+      });
+
+      fs.unlink('public/temp/uploads/'.concat(req.body.textMulterFile), err => {
+        if (err) throw err;
+      });
     }
   });
 });

@@ -382,7 +382,7 @@ $('#submit').click(function() {
       .done(function() {
         UIkit.modal
           .alert(
-            "Your submission has been sent to OTD's sales team and your provided email has been CC'd. They will be in contact with you soon."
+            "Your submission has been sent to OTD's sales team and your provided email has been CC'd. We will be in contact with you soon."
           )
           .then(function() {
             window.location.href = 'https://oilthighdesigns.ca/';
