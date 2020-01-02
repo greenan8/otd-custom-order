@@ -307,7 +307,7 @@
                             <p>Upload a high quality PNG image of your custom logo</p>
                             <form id="logo-upload-form" class="js-upload" action="/logoUpload" method="post" enctype="multipart/form-data" uk-form-custom>
                                 <input id="logo-ustring" name="ustring" hidden></input>
-                                <input type="file" accept="image/png" name="logo" id="logo-upload" onchange="this.form.submit();">
+                                <input type="file" accept="image/png" name="logo" id="logo-upload">
                                 <button id="logo-upload-button" class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </form>
                             <div id="logo-canvas-div"><canvas class="uk-card uk-card-default" id="logo-canvas"></canvas></div>
@@ -379,10 +379,10 @@
 
                         <div id="custom-list-upload">
                             <h4>Custom Text</h4>
-                            <p>Upload a csv or excel file. <a href="imgs\OTD Order Print Details.xlsx">Click here</a> to download template.</p>
+                            <p>Upload a excel file. <a href="imgs\OTD Order Print Details.xlsx">Click here</a> to download template.</p>
                             <form id="text-upload-form"class="js-upload" action="/textUpload" method="post" enctype="multipart/form-data" uk-form-custom>
                                 <input id="text-ustring" name="ustring" hidden></input>
-                                <input type="file" name="text" id="text-upload" onchange="this.form.submit();">
+                                <input type="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" name="text" id="text-upload">
                                 <button id="text-upload-button" class="uk-button uk-button-default" type="button" tabindex="-1">Select</button>
                             </form>
                             <hr id="custom-list-hr">

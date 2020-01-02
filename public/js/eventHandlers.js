@@ -154,11 +154,12 @@ $('#logo-position-options').change(function() {
 //============================= When logo submitted, upload, add to canvas, and analyze =============================
 $('#logo-upload').change(function() {
   if (this.files[0]['type'] != 'image/png') {
-    UIkit.modal.alert('That was not a png image');
+    UIkit.modal.alert('<strong>That was not a PNG file</strong>');
   } else {
     orderDetails.logoFile = URL.createObjectURL(this.files[0]);
     $('#logo-upload-button').text(this.files[0]['name']);
     logoAnalysis();
+    this.form.submit();
   }
 });
 
@@ -249,8 +250,19 @@ function logoAnalysis() {
 
 //============================= When excel submitted, upload =============================
 $('#text-upload').change(function() {
-  orderDetails.textFile = URL.createObjectURL(this.files[0]);
-  $('#text-upload-button').text(this.files[0]['name']);
+  console.log(this.files[0]['type']);
+  if (
+    this.files[0]['type'] !=
+    'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+  ) {
+    UIkit.modal.alert('<strong>That was not a XLSX file</strong>');
+  } else {
+    orderDetails.textFile = URL.createObjectURL(this.files[0]);
+    $('#text-upload-button').text(this.files[0]['name']);
+    this.form.submit();
+  }
+
+  //this.form.submit();
 });
 
 //============================= On every mouse click or key click update the estimated price =============================
