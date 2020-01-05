@@ -420,8 +420,10 @@ app.post('/textUpload', upload.single('text'), (req, res) => {
   res.sendStatus(204);
 });
 
+//============================= running app =============================
+
 if (!process.env.NODE_ENV) {
   app.listen(3000);
 } else {
-  app.listen(80);
+  app.listen(5000);
 }
