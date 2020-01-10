@@ -12,7 +12,7 @@ Airtable.configure({
 // allRecords will store the first page data from the clothing base (Can store up to 100 records)
 
 let allRecords;
-let allColors;
+let allColors = [];
 let logoPrintOptions;
 let clothingRecords = {};
 
@@ -21,13 +21,19 @@ function getAirtableData() {
     .select({
       view: 'Grid view'
     })
-    .firstPage(function(err, records) {
-      if (err) {
-        console.error(err);
-        return;
+    .eachPage(
+      function page(records, fetchNextPage) {
+        // This function (`page`) will get called for each page of records.
+        allColors.push(...records);
+        fetchNextPage();
+      },
+      function done(err) {
+        if (err) {
+          console.error(err);
+          return;
+        }
       }
-      allColors = records;
-    });
+    );
 
   clothingBase('Logo Print')
     .select({
