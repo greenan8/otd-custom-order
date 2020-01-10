@@ -215,9 +215,11 @@ app.use(express.static(__dirname + '/public'));
 //============================= All paths =============================
 //Load webapp
 app.get('/', (req, res) => {
+  let delay = 0;
   if (!process.env.NODE_ENV) {
     getAirtableData();
     getAirtableCostData();
+    delay = 4000;
   }
 
   production = process.env.NODE_ENV;
@@ -230,7 +232,7 @@ app.get('/', (req, res) => {
       logoPrintOptions,
       production
     });
-  }, 4000);
+  }, delay);
 });
 
 //admin page is to resync data
