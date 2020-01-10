@@ -40,7 +40,6 @@ $('.clothing-option').on('mousedown', function() {
   $('#selected-color-span').text(orderDetails.colorName);
 
   colorList.forEach(e => {
-    console.log(e);
     $('span.dot#' + e).attr('hidden', false);
   });
 
