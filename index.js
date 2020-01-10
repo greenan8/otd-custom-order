@@ -15,8 +15,11 @@ let allRecords;
 let allColors = [];
 let logoPrintOptions;
 let clothingRecords = {};
-
+function clearAllColor() {
+  allColors = [];
+}
 function getAirtableData() {
+  clearAllColor();
   clothingBase('Colors')
     .select({
       view: 'Grid view'
@@ -219,13 +222,15 @@ app.get('/', (req, res) => {
 
   production = process.env.NODE_ENV;
 
-  res.render('index', {
-    allRecords,
-    clothingRecords,
-    allColors,
-    logoPrintOptions,
-    production
-  });
+  setTimeout(function() {
+    res.render('index', {
+      allRecords,
+      clothingRecords,
+      allColors,
+      logoPrintOptions,
+      production
+    });
+  }, 4000);
 });
 
 //admin page is to resync data
