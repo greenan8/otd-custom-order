@@ -60,6 +60,7 @@ $('.clothing-option').on('mousedown', function() {
   $('.text-print-option').remove();
   $('#text-position-options').val('');
   orderDetails.logoPosition = '';
+  console.log(clothingRecords[currentID]['textPrintOptions']);
   for (p in clothingRecords[currentID]['textPrintOptions']) {
     $('#text-position-options').append(
       '<option class="text-print-option" value="' +
@@ -289,11 +290,11 @@ function updateEstimate() {
     setupCost = printExtraCosts['Setup Charge'];
 
     textPrice = 0;
-    if ($('#text-position-options').val() == 'Back') {
+    if ($('#text-position-options').val() == 'Upper Back') {
       textPrice = printExtraCosts['Back Name'];
     } else if (
-      $('#text-position-options').val() == 'Left' ||
-      $('#text-position-options').val() == 'Right'
+      $('#text-position-options').val() == 'Left Sleeve' ||
+      $('#text-position-options').val() == 'Right Sleeve'
     ) {
       textPrice = printExtraCosts['Sleeve Print'];
     }
