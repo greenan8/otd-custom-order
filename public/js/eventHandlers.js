@@ -89,7 +89,7 @@ $('.clothing-option').on('mousedown', function() {
 
   //move to page 2
   setTimeout(function() {
-    $('#2-button').trigger('click');
+    $('#top-level-middle').trigger('click');
   }, 500);
 
   //run estimate price again
