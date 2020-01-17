@@ -129,9 +129,6 @@ html {
   padding: 0;
   font-size: calc(9px + 0.5vw);
 }
-.clothing-menu-bottom-space {
-  height: 10vh;
-}
 .clothing-items .uk-card:active {
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 }
@@ -226,7 +223,7 @@ hr {
 }
 
 .scroll-bottom-space {
-  height: 15vh;
+  height: 8vh;
 }
 
 #custom-upload-logo .uk-card canvas {
