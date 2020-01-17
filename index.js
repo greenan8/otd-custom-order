@@ -327,15 +327,17 @@ app.post('/email', (req, res) => {
             <ul>
                 <li>Quantity: ${req.body.quantity}</li>
                 <li>Clothing: ${req.body.name}</li>
+                <li>Clothing Color: ${req.body.colorName}</li>
                 <li>Notes: ${req.body.notes}</li>
             </ul>
            
             <p>Logo</p>
             <ul>
-                <li># of Colors: ${req.body.logoColorNum}</li>
+                <li>Position: ${req.body.logoPosition}</li>  
+                <li>Type: ${req.body.printType}</li>  
                 <li>Transparency %: ${req.body.logoTransparency}</li>
                 <li>Size: ${req.body.logoSize}</li>
-                <li>Position: ${req.body.logoPosition}</li>
+                <li># of Colors: ${req.body.logoColorNum}</li>
                 <li>Stitch Count: ${req.body.logoStitchCount}</li>
             </ul>
             

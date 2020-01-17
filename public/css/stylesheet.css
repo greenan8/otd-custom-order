@@ -237,6 +237,10 @@ hr {
   margin-top: 3vh;
 }
 
+#custom-list-options {
+  margin-bottom: 3vh;
+}
+
 /* ======================= Clothing Card Styling ======================= */
 #width-right {
   text-align: center;
