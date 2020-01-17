@@ -5,7 +5,7 @@ html {
 }
 
 /* =======================Main Card Styling ======================= */
-#main-card {
+/* #main-card {
   height: 80vh;
   margin: 5vh 0;
   width: 90%;
@@ -13,18 +13,20 @@ html {
   border-radius: 15px 15px 0 0;
   display: inline-block;
   overflow: hidden;
-}
+} */
+
 #width-left {
   text-align: center;
 }
 
 /* Top level Menu Styling */
 #top-level-menu {
-  margin: 0;
+  margin: 5vh 5% 0 5%;
+  width: 90%;
   padding: 0;
-  width: 100%;
   font-size: 0;
 }
+
 #top-level-left {
   border-radius: 15px 0 0 0;
 }
@@ -53,9 +55,27 @@ html {
   border: none;
 }
 
+/* main cards */
+.main-card {
+  height: 70vh;
+  padding: 0;
+  margin: 0 5% 0 5%;
+}
+.second-card {
+  height: 67vh;
+}
+
+.scroll-card {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+.main-switcher {
+  margin: 0 !important;
+}
+
 /* Second level menus */
 .second-level-menu {
-  margin-top: -15px;
 }
 .second-level-menu li a {
   font-size: 10px;
@@ -68,7 +88,7 @@ html {
 
 /* Choose Apparel Styling */
 .clothing-items {
-  overflow: scroll;
+  /* overflow: scroll; */
   height: 80vh;
   padding: 0 28px;
 }
@@ -132,9 +152,8 @@ html {
 /* ========= Order Details Styling ============ */
 
 #order-details {
-  overflow: scroll;
-  height: 82vh;
-  margin-top: -20px;
+  /* overflow: scroll; */
+  /* height: 82vh; */
   padding: 2vw;
 }
 #order-details .scroll-bottom-space {
@@ -190,9 +209,8 @@ span.required-star {
 
 /* ========= Cusomization Styling ============ */
 #customization-items {
-  overflow: scroll;
-  height: 85vh;
-  margin-top: -20px;
+  /* overflow: scroll; */
+  /* height: 85vh; */
 }
 
 #custom-upload-logo {
@@ -441,6 +459,11 @@ hr {
     width: 60vw;
     height: 60vh;
     padding: 10vh 5vw;
+  }
+
+  #right-submit button {
+    width: 175px;
+    size: 10px;
   }
 }
 
