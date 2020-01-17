@@ -322,9 +322,9 @@ hr {
 }
 
 #right-submit button:hover {
-  border: none;
+  /* border: none;
   color: white;
-  background-color: #a22c38;
+  background-color: #a22c38; */
 }
 
 /* ======================= Intro Instructions ======================= */
@@ -401,7 +401,7 @@ hr {
   margin-top: 0.5vh;
   border: none;
   color: white;
-  background-color: #a22c38aa;
+  background-color: #a22c38;
   border-radius: 20px;
   font-weight: 700;
   opacity: 0.3;

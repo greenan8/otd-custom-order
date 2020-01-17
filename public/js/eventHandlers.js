@@ -1,4 +1,4 @@
-//============================= Creating Random unique String =============================
+//============================= Creating Random unique String and clear all inputs =============================
 $(window).on('load', function() {
   var result = '';
   var characters =
@@ -11,6 +11,14 @@ $(window).on('load', function() {
   $('#logo-ustring').val(orderDetails.logoMulterFile);
   orderDetails.textMulterFile = result.concat('.xlsx');
   $('#text-ustring').val(orderDetails.textMulterFile);
+
+  $('#quantity').val('');
+  $('#full-name').val('');
+  $('#email').val('');
+  $('#phone').val('');
+  $('#org').val('');
+  $('#ratified').val('');
+  $('#notes').val('');
 });
 
 //============================= Removes intial instructions =============================
@@ -361,16 +369,20 @@ function updateEstimate() {
 }
 
 //============================= recaptcha to block entry until checked =============================
-function recaptchaCallback() {
-  $('#start-design').removeAttr('disabled');
-  $('#start-design').css('background-color', '#A22C38');
-  $('submit-data').removeAttr('disabled');
-}
-$('#start-design').mouseover(function() {
-  $('#start-design').css('background-color', '#A22C38AA');
-});
-$('#start-design').mouseleave(function() {
-  $('#start-design').css('background-color', '#A22C38');
+
+$('#top-level-right').click(function() {
+  console.log('test');
+  $('#submit').removeAttr('disabled');
+  $('#submit').removeAttr('title');
+
+  $('#submit').mouseover(function() {
+    $('#submit').css('background-color', '#A22C38');
+    $('#submit').css('color', 'white');
+  });
+  $('#submit').mouseleave(function() {
+    $('#submit').css('background-color', 'white');
+    $('#submit').css('color', '#A22C38');
+  });
 });
 
 //============================= When submit is clicked =============================

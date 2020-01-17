@@ -25,9 +25,9 @@
                         <img src="imgs\instruct-logo.png" alt="" class="instruct-img">
                         <h1>Welcome!</h1>
                         <p>
-                            Welcome to OTD's custom order system. Read through these short instructions before getting start 
+                            Welcome to OTD's custom order system. Read through these short instructions before getting started 
                             on designing your own custom order, reviewing a rough price estimate, and submitting your 
-                            design to start a dialgue with one of our custom sales representives.
+                            design to start a dialogue with one of our custom sales representives.
                         </p>
                     </li>
                     <li>
@@ -75,10 +75,7 @@
             </div>
         
         </div>
-        <div class="center-recaptcha">
-            <div class="g-recaptcha fade-in-target" data-sitekey="6LeMZb8UAAAAAJwQpUepBeucriP8rFJqVIG6Gy3v" data-callback="recaptchaCallback"></div>
-        </div>
-        <button class="uk-button uk-button-default fade-in-target" id="start-design" disabled>START YOUR DESIGN</button>
+        <button class="uk-button uk-button-default fade-in-target" id="start-design">START YOUR DESIGN</button>
     </div>
     <div id="instruct-bg"></div>
     <%}%>
@@ -100,9 +97,9 @@
 
                 <!-- ======================== Top level menu ======================== -->
                 <div id="top-level-menu" uk-switcher="animation: uk-animation-fade; toggle: > *">
-                    <button id="top-level-left" class="uk-button uk-button-default uk-text-nowrap" type="button" id="1-button">1. Choose Apparel</button>
-                    <button class="uk-button uk-button-default uk-text-nowrap" type="button" id="2-button">2. Order Details</button>
-                    <button id="top-level-right" class="uk-button uk-button-default uk-text-nowrap" type="button" id="3-button">3. Add Customization</button>
+                    <button id="top-level-left" class="uk-button uk-button-default uk-text-nowrap" type="button">1. Choose Apparel</button>
+                    <button class="uk-button uk-button-default uk-text-nowrap" type="button">2. Order Details</button>
+                    <button id="top-level-right" class="uk-button uk-button-default uk-text-nowrap" type="button">3. Add Customization</button>
                 </div>
                 <ul class="uk-switcher uk-margin">
 
@@ -125,7 +122,7 @@
 
                                     
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if(record.get('Product Category')=="Tees and Tanks"){%>
+                                    <% if(record.get('Product Category')=="Tees and Tanks" && record.get('Available')){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
@@ -146,7 +143,7 @@
 
                                         
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if(record.get('Product Category')=="Sweaters and Sleeves"){%>
+                                    <% if(record.get('Product Category')=="Sweaters and Sleeves" && record.get('Available')){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
@@ -168,7 +165,7 @@
 
                                         
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if(record.get('Product Category')=="Jerseys"){%>
+                                    <% if(record.get('Product Category')=="Jerseys" && record.get('Available')){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
@@ -189,7 +186,7 @@
 
                                     
                                     <% allRecords.forEach(function(record){ %>
-                                    <% if(record.get('Product Category')=="Accessories and Hats"){%>
+                                    <% if(record.get('Product Category')=="Accessories and Hats" && record.get('Available')){%>
                                     <div class="clothing-option" value= <%=record.id%>>
                                         <div class="uk-card uk-card-default uk-card-hover uk-card-body">
                                             <img class="clothing-option" value= <%=record.id%> src="<%= record.get('Default Image') && record.get('Default Image')[Object.keys(record.get('Default Image'))[0]].url; %>">
@@ -293,7 +290,10 @@
                             </form>   
                         </div>
                    
-
+                        <p uk-margin>
+                            <button class="uk-button uk-button-default" onClick="document.getElementById('top-levle-left').click();">< Previous Step</button>
+                            <button class="uk-button uk-button-default" onClick="document.getElementById('top-level-right').click();">Next Step ></button>
+                        </p>
 
                     
                     <div class="scroll-bottom-space"></div>
@@ -444,7 +444,7 @@
                 <h2 id="estimate">$0.00</h2>
             </div>
             <div id="right-submit">
-                <button class="uk-button uk-button-default" id="submit"><p>Submit Details</p></button>
+                <button class="uk-button uk-button-default" id="submit" title="Complete all 3 steps first!"disabled><p>Submit Details</p></button>
             </div>
         </div>
     </div>
