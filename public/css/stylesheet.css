@@ -223,7 +223,11 @@ hr {
 }
 
 .scroll-bottom-space {
-  height: 4vh;
+  height: 8vh;
+}
+
+.garment-choice {
+  overflow: hidden;
 }
 
 #custom-upload-logo .uk-card canvas {
